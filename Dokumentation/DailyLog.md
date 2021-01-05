@@ -31,3 +31,10 @@ Mulige opdelinger af opgaver:
 -   Natasha
 
 -   Eller kombination af navnene
+
+
+Ekstra information:
+
+-   Vi har som udgangspunkt aftalt at mødes kl. 09:00
+
+-   Vi oplyser internt om hvis vi ikke har mulighed for at møde
