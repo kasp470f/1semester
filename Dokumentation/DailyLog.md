@@ -1,4 +1,5 @@
 # Daily Log - Gruppe Alpha
+- [Plan her](https://github.com/kasp470f/1semester/projects)
 
 | Dato       | Tid | Information om foretagende                                               |
 |:----------:|:-----:|--------------------------------------------------------------------------|
