@@ -47,7 +47,7 @@ CREATE TABLE [Industries] (
     [I_ID] int  NOT NULL ,
     [I_Name] varchar(200)  NOT NULL ,
     [I_Code] varchar(30)  NOT NULL ,
-    [I_Description] varchar(200)  NOT NULL ,
+    [I_Description] text,
     CONSTRAINT [PK_Industries] PRIMARY KEY CLUSTERED (
         [I_ID] ASC
     )
