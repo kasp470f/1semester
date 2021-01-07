@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Applikationen"
         mc:Ignorable="d"
+        xmlns:uc="clr-namespace:Applikationen.Views.Partials"
         Title="Forside" Height="450" Width="800">
     <Grid Style="{StaticResource Background}">
+        <uc:Toolbar VerticalAlignment="Top"/>
         <Grid x:Name="SurveillanceData">
-            
+
         </Grid>
+
+
     </Grid>
 </Window>
