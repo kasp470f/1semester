@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_1SemestersProjekt"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Forside" Height="450" Width="800">
+    <Grid Style="{StaticResource Background}">
+        <Grid x:Name="SurveillanceData">
+            
+        </Grid>
     </Grid>
 </Window>

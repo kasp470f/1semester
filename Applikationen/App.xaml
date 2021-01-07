@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:_1SemestersProjekt"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Grid" x:Key="Background">
+            <Setter Property="Background" Value="#f4f5f7"/>
+        </Style>
     </Application.Resources>
 </Application>
