@@ -8,8 +8,8 @@
              d:DesignHeight="20" d:DesignWidth="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Height="20" Background="LightGray" >
-            <MenuItem Header="Forside"/>
-            <MenuItem Header="Restriktions side"/>
+            <MenuItem Name="FrontPage" Header="Forside" Command="{Binding SetPageContentCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+            <MenuItem Name="RestrictionsPage" Header="Restriktions side" Command="{Binding SetPageContentCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
         </Menu>
     </DockPanel>
     <UserControl.Resources>

@@ -9,6 +9,7 @@
         Title="Forside" Height="450" Width="800">
     <Grid Style="{StaticResource Background}">
         <uc:Toolbar VerticalAlignment="Top"/>
+        <Frame Content="{Binding PageContent}" Name="PageContentFrame" NavigationUIVisibility="Hidden"></Frame>
         <Grid x:Name="SurveillanceData">
 
         </Grid>
