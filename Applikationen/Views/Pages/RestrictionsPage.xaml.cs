@@ -1,5 +1,4 @@
-﻿using Applikationen.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Applikationen
+namespace Applikationen.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for RestrictionsPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RestrictionsPage : Page
     {
-        public MainWindow()
+        public RestrictionsPage()
         {
             InitializeComponent();
-            MainWindowViewModel mvvm = new MainWindowViewModel();
-            DataContext = mvvm;
         }
     }
 }
