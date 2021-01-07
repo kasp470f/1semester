@@ -1,7 +1,7 @@
 # Use Case Overview
 
-| Done? | UC ID  | Use Case                                            |
-|:-----:|--------|-----------------------------------------------------|
+| Done? | UC ID  | Use Case                                           |
+|:-----:|--------|----------------------------------------------------|
 | [x]   | [UC-1.1](#display-of-relevant-data----uc-11) | Display of relevant data                            |
 | [x]   | [UC-1.2](#upload-of-csv-files---uc-12) | Upload of CSV files                                 |
 | [x]   | [UC-1.3](#addremove-industries-to-lockdownrestrictions-list---uc-13) | Add/remove industries to lockdown/restrictions list |
@@ -71,6 +71,9 @@
 
 1. User chooses CSV upload to pull the data.
 2. User picks CSVs in file explorer.
+3. User clicks the CSV upload button.
+4. Confirmation message that file is uploaded successfully.
+
 
 ---
 <h4>Alternative Courses</h4>
@@ -90,7 +93,7 @@
 <b>ID: </b> UC-1.3<br>
 <b>Priority: </b> High <br>
 <b>Actors: </b>Municipality worker <br>
-<b>Description: </b> Ability to Add/Remove industries to lockdown/restrictions list. <br>
+<b>Description: </b> Ability to add/remove industries to lockdown/restrictions list. <br>
 <b>Trigger:  </b> The app has given a suggestion to add/remove industries from lockdown/restrictions list based on the latest corona data.
 
 ---
@@ -103,24 +106,32 @@
 <h4>Preconditions</h4>
 
 1. The user has picked their municipality.
-2. The municipality worker has concluded, based on the data and suggestions given by the program, that an industry can either be locked down or restricted or be opened again.
+2. The municipality worker has concluded, based on the data for the municipality (trends in positive %, amount sick, people in hospital/intensive care, dead) for 7 days, 14 days, month, compares to country wide statistics and suggestions given by the program, that an industry can either be locked down or restricted or be opened again.
 3. CSV data is up to date.
+
 
 
 ---
 <h4>Normal Course</h4>
 
-1. User Adds/removes an industry code to/from the lockdown/restrictions list  from the list of all industries.
-2. The user can view the lockdown/restrictions list and add/remove to it.
-3. Insertion of data in database.
+1. The user can view the lockdown/restrictions list and add/remove to it.
+2. User adds/removes an industry code to/from the lockdown/restrictions list from the list of all industries.
+3. Confirmation box displays success message.
+4. List refreshes and the user can now see the added restrictions/lockdowns.
+
 
 
 ---
 <h4>Alternative Courses</h4>
 
 1. CSV data is outdated
-2. Municipality is not chosen.
-3. Error in database connection
+    1. Warns about CSV’s latest date vs. current date and suggests to double check CSV file choice
+2. Municipality is not chosen
+    1. Municipality choice is displayed until chosen
+3. Error in database connection on insert/change/delete
+    1. Displays error and box pops up asking user to retry
+    2. Returns to municipality view
+
 
 
 ---
@@ -192,8 +203,9 @@
 ---
 <h4>Normal Course</h4>
 
-1. Display current status lists of industries with dates of last changes.
+1. Display current indicator based on the CSV data.
 2. The user can make decisions based on the indicators shown.
+
 
 ---
 <h4>Alternative Courses</h4>
