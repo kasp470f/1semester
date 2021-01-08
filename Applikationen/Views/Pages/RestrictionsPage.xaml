@@ -9,6 +9,53 @@
       Title="RestrictionsPage">
 
     <Grid Style="{StaticResource Background}" Margin="0,20,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="200"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Grid VerticalAlignment="Center" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Width="130" Height="23" Grid.Column="0" IsEditable="True" IsReadOnly="True" Text="Valg af kommune" FontWeight="SemiBold">
+                <ComboBoxItem Content="kommuner her"/>
+            </ComboBox>
+
+        </Grid>
+        
+        <Grid VerticalAlignment="Center" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.6*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Vertical" Grid.Column="0" Margin="10,0,80,0">
+            <Label Content="Restriktioner" Grid.Column="0"/>
+                <TextBox Text="Søg i restriktioner..."></TextBox>
+                <ListBox Height="100"></ListBox>
+                <Button Content="TILFØJ RESTRIKTIONER" Height="23" Margin="0,20,0,0" Width="140"></Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,0,40,0">
+                <Label Content="Industrier" Grid.Column="1"/>
+                <TextBox Text="Søg i industrier..."></TextBox>
+                <ListBox Height="100"></ListBox>
+            </StackPanel>
+
+            
+        </Grid>
+        <Grid VerticalAlignment="Center" Grid.Row="2">
+
+            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,0,40,0">
+                <Label Content="Industrier med påførte restriktioner" Grid.Column="1"/>
+                <TextBox Text="Søg i industri restriktioner..."></TextBox>
+                <ListBox Height="100"></ListBox>
+            </StackPanel>
+
+        </Grid>
 
     </Grid>
 </Page>
