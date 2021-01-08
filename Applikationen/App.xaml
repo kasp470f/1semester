@@ -7,5 +7,37 @@
         <Style TargetType="Grid" x:Key="Background">
             <Setter Property="Background" Value="#f4f5f7"/>
         </Style>
+        
+        <!--Stylen til Grid for data om COVID-->
+        <Style TargetType="Grid" x:Key="DataResources">
+            <Style.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="FontSize" Value="15"/>
+                </Style>
+                <Style TargetType="Border">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Background" Value="#e0e0e0"/>
+                    <Setter Property="CornerRadius" Value="5"/>
+                    <Setter Property="BorderBrush" Value="#e0e0e0"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Grid.Column" Value="1"/>
+                    <Setter Property="Grid.Row" Value="1"/>
+                    <Setter Property="Width" Value="90"/>
+                    <Setter Property="Height" Value="25"/>
+                    <Style.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontWeight" Value="DemiBold"/>
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </Style.Resources>
+        </Style>
     </Application.Resources>
 </Application>
