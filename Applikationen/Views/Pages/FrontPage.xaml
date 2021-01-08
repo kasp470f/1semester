@@ -12,7 +12,7 @@
 
         <Grid Height="60" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*" MaxWidth="200" MinWidth="150"/>
                 <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="250"/>
@@ -28,12 +28,78 @@
                 <!--Skal ændre icon-->
             </StackPanel>
 
-            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="23">
+            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
                 <Image Source="../../Assets/Images/WarningIcon.png" Margin="0,0,5,0" RenderOptions.BitmapScalingMode="HighQuality"/>
-                <Border Background="#EF4343" BorderBrush="#B40707" BorderThickness="2" CornerRadius="5">
-                    <TextBlock Text="RESTRIKTIONER ANBEFALET" Margin="2" Foreground="White" FontWeight="DemiBold"/>
+                <Border Background="#EF4343" BorderBrush="#B40707" BorderThickness="2" CornerRadius="10" Height="30">
+                    <TextBlock Text="RESTRIKTIONER ANBEFALET" Margin="5" Foreground="White" FontWeight="DemiBold"/>
                 </Border>
             </StackPanel>
+        </Grid>
+
+        <Grid Style="{StaticResource DataResources}" Height="130" Width="auto" Margin="50,-100,50,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <!--Titler til Data-->
+            <TextBlock Grid.Column="1" Text="Smittede"/>
+            <TextBlock Grid.Column="2" Text="Tests" />
+            <TextBlock Grid.Column="3" Text="Procent" />
+            <TextBlock Grid.Column="4" Text="Indlagte" />
+            <TextBlock Grid.Column="5" Text="Intensiv" />
+            <TextBlock Grid.Column="6" Text="Døde" />
+            <TextBlock Grid.Row="1" Text="Danmark" HorizontalAlignment="Left" />
+            <TextBlock Grid.Row="2" Text="Kommune" HorizontalAlignment="Left" />
+
+            <!--Dataen selv row 1-->
+            <Border Grid.Column="1">
+                <TextBlock Text="0"/>
+            </Border>
+            <Border Grid.Column="2">
+                <TextBlock Text="0"/>
+            </Border>
+            <Border Grid.Column="3">
+                <TextBlock Text="0"/>
+            </Border>
+            <Border Grid.Column="4">
+                <TextBlock Text="0"/>
+            </Border>
+            <Border Grid.Column="5">
+                <TextBlock Text="0"/>
+            </Border>
+            <Border Grid.Column="6">
+                <TextBlock Text="0"/>
+            </Border>
+            <!--Dataen selv row 2-->
+            <Border Grid.Column="1" Grid.Row="2">
+                <TextBlock Text="0"/>
+            </Border>
+            <Border Grid.Column="2" Grid.Row="2">
+                <TextBlock Text="0"/>
+            </Border>
+            <Border Grid.Column="3" Grid.Row="2">
+                <TextBlock Text="0"/>
+            </Border>
+            <Border Grid.Column="4" Grid.Row="2">
+                <TextBlock Text="0"/>
+            </Border>
+            <Border Grid.Column="5" Grid.Row="2">
+                <TextBlock Text="0"/>
+            </Border>
+            <Border Grid.Column="6" Grid.Row="2">
+                <TextBlock Text="0"/>
+            </Border>
+
         </Grid>
     </Grid>
 </Page>
