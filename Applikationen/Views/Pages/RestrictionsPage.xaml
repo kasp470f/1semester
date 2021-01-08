@@ -5,10 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Applikationen.Views.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="430" d:DesignWidth="800"
       Title="RestrictionsPage">
 
-    <Grid>
-        <Button Content="HAHAHAHA" Height="20" Width="50"/>
+    <Grid Style="{StaticResource Background}" Margin="0,20,0,0">
+
     </Grid>
 </Page>
