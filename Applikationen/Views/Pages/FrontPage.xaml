@@ -5,10 +5,35 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Applikationen.Views.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="430" d:DesignWidth="800"
       Title="FrontPage">
 
-    <Grid>
-        <Button Content="HEJ" Height="20" Width="50"/>
+    <Grid Style="{StaticResource Background}" Margin="0,20,0,0">
+
+        <Grid Height="60" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Width="130" Height="23" Grid.Column="0" IsEditable="True" IsReadOnly="True" Text="Valg af kommune" FontWeight="SemiBold">
+                <ComboBoxItem Content="kommuner her"/>
+            </ComboBox>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Width="170" Height="23" IsEnabled="False" x:Name="csvPath" Text="CSV Fil Valg"/>
+                <Button Width="40" Height="23" Content="📎" FontSize="15"/>
+                <!--Skal ændre icon-->
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="23">
+                <Image Source="../../Assets/Images/WarningIcon.png" Margin="0,0,5,0" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <Border Background="#EF4343" BorderBrush="#B40707" BorderThickness="2" CornerRadius="5">
+                    <TextBlock Text="RESTRIKTIONER ANBEFALET" Margin="2" Foreground="White" FontWeight="DemiBold"/>
+                </Border>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>
