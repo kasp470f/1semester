@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Applikationen.Views.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="430" d:DesignWidth="800"
-      Title="RestrictionsPage">
+      Title="Restrictions Page">
 
     <Grid Style="{StaticResource Background}" Margin="0,20,0,0">
         <Grid.RowDefinitions>

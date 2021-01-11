@@ -8,7 +8,7 @@
             <Setter Property="Background" Value="#f4f5f7"/>
         </Style>
         
-        <!--Stylen til Grid for data om COVID-->
+        <!--Stylen til Grid for data om COVID på forsiden-->
         <Style TargetType="Grid" x:Key="DataResources">
             <Style.Resources>
                 <Style TargetType="TextBlock">
@@ -34,6 +34,7 @@
                             <Setter Property="VerticalAlignment" Value="Center"/>
                             <Setter Property="Foreground" Value="White"/>
                             <Setter Property="FontWeight" Value="DemiBold"/>
+                            <Setter Property="FontSize" Value="13"/>
                         </Style>
                     </Style.Resources>
                 </Style>
