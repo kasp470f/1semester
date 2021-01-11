@@ -99,7 +99,8 @@ INSERT INTO [dbo].[Municipalities] VALUES
 ('Læsø'),
 ('Ærø'),
 ('Fanø'),
-('Samsø');
+('Samsø'),
+('Christiansø');
 
 
 	GO
