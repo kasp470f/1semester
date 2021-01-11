@@ -40,5 +40,10 @@
                 </Style>
             </Style.Resources>
         </Style>
+        
+        <!--Style til Restriktions Siden-->
+        <Style TargetType="Label">
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
     </Application.Resources>
 </Application>

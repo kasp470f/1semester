@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Applikationen"
         mc:Ignorable="d"
         xmlns:uc="clr-namespace:Applikationen.Views.Partials"
-        Title="Forside" Height="450" Width="800">
+        Title="Corona Restriktions Software" Height="450" Width="800">
     <Grid>
         <uc:Toolbar/>
         <Frame Content="{Binding PageContent}" Name="PageContentFrame" NavigationUIVisibility="Hidden"></Frame>
