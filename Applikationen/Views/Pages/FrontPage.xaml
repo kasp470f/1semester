@@ -30,7 +30,7 @@
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBox Width="170" Height="23" IsEnabled="False" x:Name="csvPath" Text="CSV Fil Valg"/>
-                    <Button Width="50" Height="23" Content="Upload" FontSize="12"/>
+                    <Button Width="50" Height="23" Content="Upload" FontSize="12" Click="Button_Click"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
@@ -68,22 +68,22 @@
 
                 <!--Dataen selv row 1-->
                 <Border Grid.Column="1">
-                    <TextBlock Text="0"/>
+                    <TextBlock Name="positiveBox" Text="{Binding Path=positive, UpdateSourceTrigger=Explicit}" />
                 </Border>
                 <Border Grid.Column="2">
-                    <TextBlock Text="0"/>
+                    <TextBlock Name="testedBox" Text="{Binding Path=tested, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <Border Grid.Column="3">
-                    <TextBlock Text="0"/>
+                    <TextBlock Name="percentagePositiveBox" Text="{Binding Path=percentagePositive, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <Border Grid.Column="4">
-                    <TextBlock Text="0"/>
+                    <TextBlock Name="hospitalizedBox" Text="{Binding Path=hospitalized, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <Border Grid.Column="5">
-                    <TextBlock Text="0"/>
+                    <TextBlock Name="icuBox" Text="{Binding Path=icu, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <Border Grid.Column="6">
-                    <TextBlock Text="0"/>
+                    <TextBlock Name="deathsBox" Text="{Binding Path=deaths, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <!--Dataen selv row 2-->
                 <Border Grid.Column="1" Grid.Row="2">
