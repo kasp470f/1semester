@@ -1,7 +1,7 @@
 USE [team1]
 GO
 
-INSERT INTO [dbo].[Municipalities] VALUES
+INSERT INTO [team1].[dbo].[Restrictions] VALUES
 ('Komplet nedlukning'),
 ('Arealkrav'),
 ('Afstandskrav'),
