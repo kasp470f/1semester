@@ -1,18 +1,12 @@
 ﻿DECLARE @dbname nvarchar(128)
-SET @dbname = N'ProjectAlpha'
+SET @dbname = N'team1'
 
 IF (EXISTS (SELECT name 
 FROM master.dbo.sysdatabases 
 WHERE ('[' + name + ']' = @dbname 
 OR name = @dbname)))
 
-PRINT 'Database Already Exists'
-GO
-
-CREATE DATABASE ProjectAlpha;
-GO
-
-USE [ProjectAlpha]
+USE [team1]
 GO
 
 CREATE TABLE [Municipalities] (

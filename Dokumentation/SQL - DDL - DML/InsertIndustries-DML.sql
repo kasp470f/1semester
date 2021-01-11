@@ -1,4 +1,4 @@
-USE [ProjectAlpha]
+USE [team1]
 GO
 
 INSERT INTO [dbo].[Industries]
