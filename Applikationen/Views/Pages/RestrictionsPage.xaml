@@ -11,7 +11,8 @@
     <Grid Style="{StaticResource Background}" Margin="0,20,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="170"/>
+            <RowDefinition Height="24"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         
@@ -36,7 +37,7 @@
             <Label Content="Restriktioner" Grid.Column="0"/>
                 <TextBox Text="Søg i restriktioner..."></TextBox>
                 <ListBox Height="100"></ListBox>
-                <Button Content="TILFØJ RESTRIKTIONER" Height="23" Margin="0,20,0,0" Width="140"></Button>
+                
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,0,40,0">
@@ -47,12 +48,19 @@
 
             
         </Grid>
-        <Grid VerticalAlignment="Center" Grid.Row="2">
+        <Grid HorizontalAlignment="Left" Grid.Row="2">
 
-            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,0,40,0">
-                <Label Content="Industrier med påførte restriktioner" Grid.Column="1"/>
+            <StackPanel Orientation="Vertical" Margin="10,0,00,0">
+                <Button Content="TILFØJ RESTRIKTIONER" Height="23" Width="140"></Button>
+            </StackPanel>
+
+        </Grid>
+        <Grid VerticalAlignment="Center" Grid.Row="3">
+
+            <StackPanel Orientation="Vertical" Margin="10,0,40,0">
+                <Label Content="Industrier med påførte restriktioner"/>
                 <TextBox Text="Søg i industri restriktioner..."></TextBox>
-                <ListBox Height="100"></ListBox>
+                <ListBox Height="85"></ListBox>
             </StackPanel>
 
         </Grid>
