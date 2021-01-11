@@ -1,4 +1,4 @@
-USE [ProjectAlpha]
+USE [team1]
 GO
 
 INSERT INTO [dbo].[Municipalities] VALUES
@@ -99,7 +99,8 @@ INSERT INTO [dbo].[Municipalities] VALUES
 ('Læsø'),
 ('Ærø'),
 ('Fanø'),
-('Samsø');
+('Samsø'),
+('Christiansø');
 
 
 	GO
