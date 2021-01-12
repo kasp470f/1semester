@@ -1,39 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
 
-namespace Applikationen.CoronaDataFunctions
+namespace Applikationen.CoronaData
 {
-    // Keemon, Natasha, Nichlas
-    public class CoronaData
-    {   
-        public string region { get; set; }
-        public double positive { get; set; }
-        public double tested { get; set; } 
-        public double percentagePositive { get; set; }
-        public double hospitalized { get; set; }
-        public double icu { get; set; }
-        public double deaths { get; set; }
+    public class municipalityPositive
+    {
+        public double Positive { get; set; }
 
         // For processing Region_summary.csv data
-        public CoronaData(string Region, double Tested, double Positive, double Hospitalized, double Deaths)
+        public municipalityPositive(double positive)
         {
-            region = Region;
-            tested = Tested;
-            positive = Positive;
-            hospitalized = Hospitalized;
-            deaths = Deaths;
+            Positive = positive;
         }
 
         // For loading Region_summary.csv data
-        public static IEnumerable<CoronaData> ReadCSV(string fileName)
+        public static IEnumerable<municipalityPositive> ReadCSV(string fileName)
         {
-            List<CoronaData> listCSV = new List<CoronaData>();
+            List<municipalityPositive> listCSV = new List<municipalityPositive>();
             // We try to open a file and check whether it is a csv
             string lines = File.ReadAllText(fileName);
 
@@ -43,31 +30,19 @@ namespace Applikationen.CoronaDataFunctions
             var datalist = data.ToList();
             datalist.RemoveRange(0, 5);
             data = datalist.ToArray();
-            
+
             for (int i = 0; i < data.Length; i++)
             {
                 data[i] = data[i].Trim();
                 data[i] = data[i].Replace(".", "");
             }
 
-            for (int i = 0; i < 35;)
-            {
-                Debug.WriteLine("New set");
-                Debug.WriteLine(data[i]);
-                Debug.WriteLine(data[i+1]);
-                Debug.WriteLine(data[i+2]);
-                Debug.WriteLine(data[i+3]);
-                Debug.WriteLine(data[i+4]);
 
-                i = i + 5;
-            }
-            
-
-            for (int i = 0; i < 35;)
-            {
-                listCSV.Add(new CoronaData(data[i], double.Parse(data[i+1], System.Globalization.CultureInfo.InvariantCulture), double.Parse(data[i+2], System.Globalization.CultureInfo.InvariantCulture), double.Parse(data[i+3], System.Globalization.CultureInfo.InvariantCulture), double.Parse(data[i+4], System.Globalization.CultureInfo.InvariantCulture)));
-                i = i + 5;
-            }
+            //for (int i = 0; i < 35;)
+            //{
+            //    listCSV.Add(new municipalityPositive(data[i], double.Parse(data[i + 1], System.Globalization.CultureInfo.InvariantCulture), double.Parse(data[i + 2], System.Globalization.CultureInfo.InvariantCulture), double.Parse(data[i + 3], System.Globalization.CultureInfo.InvariantCulture), double.Parse(data[i + 4], System.Globalization.CultureInfo.InvariantCulture)));
+            //    i = i + 5;
+            //}
             // We return CoronaData with the data in the following order: Region, Tested (Total values), Positive, Hospitalized, Deaths
             return listCSV;
         }

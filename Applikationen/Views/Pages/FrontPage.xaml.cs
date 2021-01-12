@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using Applikationen.CoronaDataFunctions;
+using Applikationen.CoronaData;
+using System.Globalization;
 
 namespace Applikationen.Views.Pages
 {
@@ -30,27 +32,33 @@ namespace Applikationen.Views.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
+            
+            var regionDataCSV = RegionData.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Region_summary.csv");
 
-            var coronaData = CoronaData.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Region_summary.csv");
+            //var municipalityTestPosDataCSV = municipalityTestedTS.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Municipality_test_pos.csv");
 
-            var coronaDataUsed = coronaData.First();
+            //var admittedNewDataCSV = RegionData.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Newly_admitted_over_time.csv");
 
-            double positive = coronaDataUsed.positive;
+            //var deathsTimeDataCSV = RegionData.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Deaths_over_time.csv");
+
+            //var municipalityCTSregionDataCSV = RegionData.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Municipality_cases_time_series.csv");
+            
+
+            var coronaDataUsed = regionDataCSV.First();
+
+            double positive = coronaDataUsed.Positive;
             positiveBox.Text = positive.ToString();
 
-            double tested = coronaDataUsed.tested;
-            testedBox.Text = tested.ToString();
+            double tested = coronaDataUsed.Tested;
+            testedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", tested);
 
-            double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.positive, coronaDataUsed.tested);
+            double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
             percentagePositiveBox.Text = percentagePositive.ToString();
 
-            double hospitalized = coronaDataUsed.hospitalized;
+            double hospitalized = coronaDataUsed.Hospitalized;
             hospitalizedBox.Text = hospitalized.ToString();
 
-            double icu = 0;
-            icuBox.Text = icu.ToString();
-
-            double deaths = coronaDataUsed.deaths;
+            double deaths = coronaDataUsed.Deaths;
             deathsBox.Text = deaths.ToString();
         }
     }
