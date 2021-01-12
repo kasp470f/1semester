@@ -47,19 +47,19 @@ namespace Applikationen.Views.Pages
             var coronaDataUsed = regionDataCSV.First();
 
             double positive = coronaDataUsed.Positive;
-            positiveBox.Text = positive.ToString();
+            positiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", positive);
 
             double tested = coronaDataUsed.Tested;
             testedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", tested);
 
             double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
-            percentagePositiveBox.Text = percentagePositive.ToString();
+            percentagePositiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", percentagePositive);
 
             double hospitalized = coronaDataUsed.Hospitalized;
-            hospitalizedBox.Text = hospitalized.ToString();
+            hospitalizedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", hospitalized);
 
             double deaths = coronaDataUsed.Deaths;
-            deathsBox.Text = deaths.ToString();
+            deathsBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", deaths);
         }
     }
 }

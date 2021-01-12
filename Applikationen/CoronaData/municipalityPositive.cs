@@ -9,12 +9,14 @@ namespace Applikationen.CoronaData
 {
     public class municipalityPositive
     {
-        public double Positive { get; set; }
+        public int Positive { get; set; }
+        public int Tested { get; set; }
 
         // For processing Region_summary.csv data
-        public municipalityPositive(double positive)
+        public municipalityPositive(int positive, int tested)
         {
             Positive = positive;
+            Tested = tested;
         }
 
         // For loading Region_summary.csv data
@@ -27,10 +29,6 @@ namespace Applikationen.CoronaData
             // We split the csv data at each semicolon to have separate fields/rows
             string[] data = lines.Split(new[] { ";", "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
-            var datalist = data.ToList();
-            datalist.RemoveRange(0, 5);
-            data = datalist.ToArray();
-
             for (int i = 0; i < data.Length; i++)
             {
                 data[i] = data[i].Trim();
@@ -38,12 +36,12 @@ namespace Applikationen.CoronaData
             }
 
 
-            //for (int i = 0; i < 35;)
-            //{
-            //    listCSV.Add(new municipalityPositive(data[i], double.Parse(data[i + 1], System.Globalization.CultureInfo.InvariantCulture), double.Parse(data[i + 2], System.Globalization.CultureInfo.InvariantCulture), double.Parse(data[i + 3], System.Globalization.CultureInfo.InvariantCulture), double.Parse(data[i + 4], System.Globalization.CultureInfo.InvariantCulture)));
-            //    i = i + 5;
-            //}
-            // We return CoronaData with the data in the following order: Region, Tested (Total values), Positive, Hospitalized, Deaths
+            for (int i = 0; i < 35;)
+            {
+                listCSV.Add(new municipalityPositive(data[i], int.Parse(data[i + 1], System.Globalization.CultureInfo.InvariantCulture), int.Parse(data[i + 2], System.Globalization.CultureInfo.InvariantCulture))));
+                i = i + 5;
+            }
+
             return listCSV;
         }
 
