@@ -29,14 +29,14 @@
                 </ComboBox>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBox Width="170" Height="23" IsEnabled="False" x:Name="csvPath" Text="CSV Fil Valg"/>
-                    <Button Width="50" Height="23" Content="Upload" FontSize="12" Click="Button_Click"/>
+                    <TextBox Width="170" Height="23" IsEnabled="False" x:Name="csvPath" Text="CSV Mappe"/>
+                    <Button Width="50" Height="23" Content="Upload" FontSize="12" Click="UploadButton_Click"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
-                    <Image Source="../../Assets/Images/WarningIcon.png" Margin="0,0,5,0" RenderOptions.BitmapScalingMode="HighQuality"/>
-                    <Border Background="#EF4343" BorderBrush="#B40707" BorderThickness="2" CornerRadius="10" Height="30">
-                        <TextBlock Text="RESTRIKTIONER ANBEFALET" Margin="5" Foreground="White" FontWeight="DemiBold"/>
+                <StackPanel x:Name="Indicator"  Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Style="{DynamicResource IndicatorBad}">
+                    <Image Margin="0,0,5,0" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Border BorderThickness="2" CornerRadius="10" Height="30">
+                        <TextBlock Margin="5" Foreground="White" FontWeight="DemiBold" Width="auto" HorizontalAlignment="Right"/>
                     </Border>
                 </StackPanel>
             </Grid>
@@ -49,7 +49,7 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
+
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -61,8 +61,7 @@
                 <TextBlock Grid.Column="2" Text="Tests" />
                 <TextBlock Grid.Column="3" Text="Procent" />
                 <TextBlock Grid.Column="4" Text="Indlagte" />
-                <TextBlock Grid.Column="5" Text="Intensiv" />
-                <TextBlock Grid.Column="6" Text="Døde" />
+                <TextBlock Grid.Column="5" Text="Døde" />
                 <TextBlock Grid.Row="1" Text="Danmark" HorizontalAlignment="Left" />
                 <TextBlock Grid.Row="2" Text="Kommune" HorizontalAlignment="Left" />
 
@@ -80,9 +79,6 @@
                     <TextBlock Name="hospitalizedBox" Text="{Binding Path=hospitalized, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <Border Grid.Column="5">
-                    <TextBlock Name="icuBox" Text="{Binding Path=icu, UpdateSourceTrigger=Explicit}"/>
-                </Border>
-                <Border Grid.Column="6">
                     <TextBlock Name="deathsBox" Text="{Binding Path=deaths, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <!--Dataen selv row 2-->
@@ -99,9 +95,6 @@
                     <TextBlock Text="0"/>
                 </Border>
                 <Border Grid.Column="5" Grid.Row="2">
-                    <TextBlock Text="0"/>
-                </Border>
-                <Border Grid.Column="6" Grid.Row="2">
                     <TextBlock Text="0"/>
                 </Border>
             </Grid>
