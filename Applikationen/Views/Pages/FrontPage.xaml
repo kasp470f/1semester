@@ -33,10 +33,10 @@
                     <Button Width="50" Height="23" Content="Upload" FontSize="12" Click="Button_Click"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
-                    <Image Source="../../Assets/Images/WarningIcon.png" Margin="0,0,5,0" RenderOptions.BitmapScalingMode="HighQuality"/>
-                    <Border Background="#EF4343" BorderBrush="#B40707" BorderThickness="2" CornerRadius="10" Height="30">
-                        <TextBlock Text="RESTRIKTIONER ANBEFALET" Margin="5" Foreground="White" FontWeight="DemiBold"/>
+                <StackPanel x:Name="Indicator"  Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Style="{DynamicResource IndicatorBad}">
+                    <Image Margin="0,0,5,0" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Border BorderThickness="2" CornerRadius="10" Height="30">
+                        <TextBlock Margin="5" Foreground="White" FontWeight="DemiBold" Width="auto" HorizontalAlignment="Right"/>
                     </Border>
                 </StackPanel>
             </Grid>

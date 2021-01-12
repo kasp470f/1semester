@@ -22,9 +22,13 @@ namespace Applikationen.Views.Pages
     /// </summary>
     public partial class FrontPage : Page
     {
+        public bool IndicatorStatus = true;
         public FrontPage()
         {
             InitializeComponent();
+
+            if (IndicatorStatus == true) Indicator.Style = FindResource("IndicatorGood") as Style;
+            else Indicator.Style = FindResource("IndicatorBad") as Style;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

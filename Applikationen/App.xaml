@@ -7,7 +7,43 @@
         <Style TargetType="Grid" x:Key="Background">
             <Setter Property="Background" Value="#f4f5f7"/>
         </Style>
-        
+
+        <!--Status indikator trigger-->
+        <Style TargetType="StackPanel" x:Key="IndicatorBad">
+            <Style.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Source" Value="/Assets/Images/WarningIcon.png"/>
+                </Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="#EF4343"/>
+                    <Setter Property="BorderBrush" Value="#B40707"/>
+                    <Style.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Text" Value="Restriktioner Anbefalet"/>
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style TargetType="StackPanel" x:Key="IndicatorGood">
+            <Style.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Source" Value="/Assets/Images/OkIcon.png"/>
+                </Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="#008000"/>
+                    <Setter Property="BorderBrush" Value="#005200"/>
+                    <Style.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Text" Value="Alt vel"/>
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+
         <!--Stylen til Grid for data om COVID på forsiden-->
         <Style TargetType="Grid" x:Key="DataResources">
             <Style.Resources>
