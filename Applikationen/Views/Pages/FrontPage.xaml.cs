@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using Applikationen.CoronaDataFunctions;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Applikationen.Views.Pages
 {
@@ -33,29 +34,13 @@ namespace Applikationen.Views.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-
-            var coronaData = CoronaData.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Region_summary.csv");
-
-            var coronaDataUsed = coronaData.First();
-
-            double positive = coronaDataUsed.positive;
-            positiveBox.Text = positive.ToString();
-
-            double tested = coronaDataUsed.tested;
-            testedBox.Text = tested.ToString();
-
-            double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.positive, coronaDataUsed.tested);
-            percentagePositiveBox.Text = percentagePositive.ToString();
-
-            double hospitalized = coronaDataUsed.hospitalized;
-            hospitalizedBox.Text = hospitalized.ToString();
-
-            double icu = 0;
-            icuBox.Text = icu.ToString();
-
-            double deaths = coronaDataUsed.deaths;
-            deathsBox.Text = deaths.ToString();
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = "C:\\Users";
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                csvPath.Text = dialog.FileName;
+            }
         }
     }
 }
