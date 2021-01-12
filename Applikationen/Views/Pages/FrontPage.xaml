@@ -61,8 +61,7 @@
                 <TextBlock Grid.Column="2" Text="Tests" />
                 <TextBlock Grid.Column="3" Text="Procent" />
                 <TextBlock Grid.Column="4" Text="Indlagte" />
-                <TextBlock Grid.Column="5" Text="Intensiv" />
-                <TextBlock Grid.Column="6" Text="Døde" />
+                <TextBlock Grid.Column="5" Text="Døde" />
                 <TextBlock Grid.Row="1" Text="Danmark" HorizontalAlignment="Left" />
                 <TextBlock Grid.Row="2" Text="Kommune" HorizontalAlignment="Left" />
 
@@ -80,9 +79,6 @@
                     <TextBlock Name="hospitalizedBox" Text="{Binding Path=hospitalized, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <Border Grid.Column="5">
-                    <TextBlock Name="icuBox" Text="{Binding Path=icu, UpdateSourceTrigger=Explicit}"/>
-                </Border>
-                <Border Grid.Column="6">
                     <TextBlock Name="deathsBox" Text="{Binding Path=deaths, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <!--Dataen selv row 2-->
@@ -99,9 +95,6 @@
                     <TextBlock Text="0"/>
                 </Border>
                 <Border Grid.Column="5" Grid.Row="2">
-                    <TextBlock Text="0"/>
-                </Border>
-                <Border Grid.Column="6" Grid.Row="2">
                     <TextBlock Text="0"/>
                 </Border>
             </Grid>

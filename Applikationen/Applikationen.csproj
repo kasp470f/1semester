@@ -24,4 +24,8 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DatabaseClasses\" />
+  </ItemGroup>
+
 </Project>
