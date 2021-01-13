@@ -62,9 +62,6 @@ namespace Applikationen.MunicipalityFunctions
 		// Keemon & Natasha
 		public List<ComboBoxItem> GetMunicipalityList()
 		{
-			// We create a list to store the municipalities from the database in
-
-
 			// We open the connection to the database
 			SqlConnection cnn;
 			cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["post"].ConnectionString);
