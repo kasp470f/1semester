@@ -22,7 +22,7 @@
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox Name="municipalityBox" Width="130" Height="23" Grid.Column="0" IsEditable="True" IsReadOnly="True" Text="Valg af kommune" FontWeight="SemiBold">
+                <ComboBox Name="municipalityBox" Width="130" Height="23" Grid.Column="0" IsEditable="True" IsReadOnly="True" Text="Vælg en kommune" FontWeight="SemiBold">
                 </ComboBox>
             </Grid>
 
