@@ -69,5 +69,12 @@
       <FileName>App.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Applikationen.MunicipalityFunctions.Municipality">
+    <Position X="10.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAQAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>DatabaseClasses\Municipality.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

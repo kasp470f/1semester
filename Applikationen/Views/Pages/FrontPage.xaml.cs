@@ -17,6 +17,7 @@ using Applikationen.CoronaData;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Globalization;
 using System.Diagnostics;
+using Applikationen.DatabaseClasses;
 
 namespace Applikationen.Views.Pages
 {
@@ -28,6 +29,8 @@ namespace Applikationen.Views.Pages
         public FrontPage()
         {
             InitializeComponent();
+            Restriction restriction = new Restriction();
+            restriction.GetRestriction();
             if (IndicatorStatus == true) Indicator.Style = FindResource("IndicatorGood") as Style;
             else Indicator.Style = FindResource("IndicatorBad") as Style;
         }

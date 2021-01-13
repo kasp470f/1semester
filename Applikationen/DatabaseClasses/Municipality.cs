@@ -7,6 +7,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Data.SqlClient;
+using System.Configuration;
 
 // Insert 
 // MunicipalityFunctions.Municipality municipality = new MunicipalityFunctions.Municipality();
@@ -30,15 +31,14 @@ namespace Applikationen.MunicipalityFunctions
 
 			// We open the connection to the database
 			SqlConnection cnn;
-			cnn = new SqlConnection(@"Data Source= DATAMATIKERDATA;Initial Catalog = team1; User ID = t1login; Password =t1login12345");
+			cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["post"].ConnectionString);
 			cnn.Open();
 
 			// We create the command and execute it
 			SqlCommand command;
 			SqlDataAdapter adapter = new SqlDataAdapter();
-			String sql = "";
 
-			sql = "SELECT * FROM \"Municipalities\"";
+			string sql = "SELECT * FROM \"Municipalities\"";
  
 			command = new SqlCommand(sql, cnn);
 
