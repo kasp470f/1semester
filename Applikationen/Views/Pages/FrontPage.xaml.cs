@@ -13,45 +13,66 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
-using Applikationen.CoronaDataFunctions;
+using Applikationen.CoronaData;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Globalization;
+using System.Diagnostics;
 
 namespace Applikationen.Views.Pages
 {
-    /// <summary>
-    /// Interaction logic for FrontPage.xaml
-    /// </summary>
     public partial class FrontPage : Page
     {
+        public string FolderPath { get; set; }
+
+        public bool IndicatorStatus = true;
         public FrontPage()
         {
             InitializeComponent();
+            if (IndicatorStatus == true) Indicator.Style = FindResource("IndicatorGood") as Style;
+            else Indicator.Style = FindResource("IndicatorBad") as Style;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = (FolderPath == "") ? "C:\\Users" : FolderPath;
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                FolderPath = dialog.FileName;
+                csvPath.Text = FolderPath;
+            }
 
-            var coronaData = CoronaData.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Region_summary.csv");
+            RegionDataBinding();
+            MunicipalityDataBinding();
+        }
 
-            var coronaDataUsed = coronaData.First();
+        private void RegionDataBinding()
+        {
+            var regionDataCSV = RegionData.ReadCSV(FolderPath + "\\Region_summary.csv");
 
-            double positive = coronaDataUsed.positive;
-            positiveBox.Text = positive.ToString();
+            var coronaDataUsed = regionDataCSV.Last();
 
-            double tested = coronaDataUsed.tested;
-            testedBox.Text = tested.ToString();
+            double positive = coronaDataUsed.Positive;
+            positiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", positive);
 
-            double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.positive, coronaDataUsed.tested);
-            percentagePositiveBox.Text = percentagePositive.ToString();
+            double tested = coronaDataUsed.Tested;
+            testedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", tested);
 
-            double hospitalized = coronaDataUsed.hospitalized;
-            hospitalizedBox.Text = hospitalized.ToString();
+            double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
+            percentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
 
-            double icu = 0;
-            icuBox.Text = icu.ToString();
+            double hospitalized = coronaDataUsed.Hospitalized;
+            hospitalizedBox.Text = string.Format("{0}", hospitalized);
 
-            double deaths = coronaDataUsed.deaths;
-            deathsBox.Text = deaths.ToString();
+            double deaths = coronaDataUsed.Deaths;
+            deathsBox.Text = string.Format("{0}", deaths);
+        }
+
+        private void MunicipalityDataBinding()
+        {
+            var MunicipalityDataCSV = municipalityPositive.ReadCSV(FolderPath + "\\Municipality_test_pos.csv");
+
         }
     }
 }
