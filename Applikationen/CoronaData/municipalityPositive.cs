@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Applikationen.CoronaData
 {
-    public class municipalityPositive
+    public class MunicipalityPositive
     {
         public string Municipality { get; set; }
 
@@ -17,7 +17,7 @@ namespace Applikationen.CoronaData
         public double Tested { get; set; }
 
         // For the Municipality_test_pos.csv data constructor
-        public municipalityPositive(string municipality, double tested, double positive)
+        public MunicipalityPositive(string municipality, double tested, double positive)
         {
             Municipality = municipality;
             Positive = positive;
@@ -25,9 +25,9 @@ namespace Applikationen.CoronaData
         }
 
         // For loading Municipality_test_pos.csv data
-        public static IEnumerable<municipalityPositive> ReadCSV(string fileName)
+        public static IEnumerable<MunicipalityPositive> ReadCSV(string fileName)
         {
-            List<municipalityPositive> listCSV = new List<municipalityPositive>();
+            List<MunicipalityPositive> listCSV = new List<MunicipalityPositive>();
             // We try to open a file and check whether it is a csv
             string lines = File.ReadAllText(fileName);
 
@@ -38,10 +38,29 @@ namespace Applikationen.CoronaData
             for (int i = 1; i < dataLines.Length-1; i++)
             {
                 string[] data = dataLines[i].Split(';');
-                listCSV.Add(new municipalityPositive(data[1], double.Parse(data[2]), double.Parse(data[3])));
+                listCSV.Add(new MunicipalityPositive(data[1], double.Parse(data[2]), double.Parse(data[3])));
             }
 
             return listCSV;
+        }
+
+
+        private void MunicipalityRegion()
+        {
+
+        }
+
+
+        // ----------------
+        // Helper functions
+        // ----------------
+
+        // Calculate percentages, meant for use with percentagePositive
+        public double PercentageOfData(double newData, double totalData)
+        {
+            // We take the newData and find which percentage of the totalData it is
+            double percentComplete = (double)Math.Round((double)(100 * newData) / totalData);
+            return percentComplete;
         }
     }
 }
