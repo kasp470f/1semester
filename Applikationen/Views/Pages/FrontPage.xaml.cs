@@ -54,25 +54,13 @@ namespace Applikationen.Views.Pages
             var coronaDataUsed = regionDataCSV.Last();
 
             double positive = coronaDataUsed.Positive;
-<<<<<<< HEAD
-            positiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", positive);
-=======
             positiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", positive);
->>>>>>> origin/develop
+
 
             double tested = coronaDataUsed.Tested;
             testedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", tested);
 
             double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
-<<<<<<< HEAD
-            percentagePositiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", percentagePositive);
-
-            double hospitalized = coronaDataUsed.Hospitalized;
-            hospitalizedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", hospitalized);
-
-            double deaths = coronaDataUsed.Deaths;
-            deathsBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", deaths);
-=======
             percentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
 
             double hospitalized = coronaDataUsed.Hospitalized;
@@ -85,8 +73,6 @@ namespace Applikationen.Views.Pages
         private void MunicipalityDataBinding()
         {
             var MunicipalityDataCSV = municipalityPositive.ReadCSV(FolderPath + "\\Municipality_test_pos.csv");
-
->>>>>>> origin/develop
         }
     }
 }
