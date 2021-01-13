@@ -47,7 +47,6 @@ namespace Applikationen.Views.Pages
             double positive = coronaDataUsed.Positive;
             DKpositiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", positive);
 
-
             double tested = coronaDataUsed.Tested;
             DKtestedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", tested);
 
