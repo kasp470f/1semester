@@ -18,6 +18,7 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Globalization;
 using System.Diagnostics;
 using Applikationen.DatabaseClasses;
+using Applikationen.MunicipalityFunctions;
 
 namespace Applikationen.Views.Pages
 {
@@ -29,8 +30,10 @@ namespace Applikationen.Views.Pages
         public FrontPage()
         {
             InitializeComponent();
-            Restriction restriction = new Restriction();
-            restriction.GetRestriction();
+
+            // Displays municipalities in dropdown menu/combobox
+            DisplayMunicipalities();
+
             if (IndicatorStatus == true) Indicator.Style = FindResource("IndicatorGood") as Style;
             else Indicator.Style = FindResource("IndicatorBad") as Style;
         }
@@ -49,6 +52,20 @@ namespace Applikationen.Views.Pages
             RegionDataBinding();
             MunicipalityDataBinding();
         }
+
+        // Keemon & Natasha
+        public void DisplayMunicipalities()
+        {
+            Municipality municipality = new Municipality();
+
+            List<ComboBoxItem> items = municipality.GetMunicipalityList();
+
+            foreach (var item in items)
+            {
+                municipalityBox.Items.Add(item);
+            }
+        }
+
 
         private void RegionDataBinding()
         {
