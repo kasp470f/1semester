@@ -35,7 +35,7 @@ namespace Applikationen.CoronaData
             string[] dataLines = lines.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
             // We split the lines into fields and add them to a list.
-            for (int i = 1; i < dataLines.Length-1; i++)
+            for (int i = 1; i < dataLines.Length - 1; i++)
             {
                 string[] data = dataLines[i].Split(';');
                 listCSV.Add(new MunicipalityPositive(data[1], double.Parse(data[2]), double.Parse(data[3])));
