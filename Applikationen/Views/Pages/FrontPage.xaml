@@ -67,29 +67,29 @@
 
                 <!--Dataen selv row 1-->
                 <Border Grid.Column="1">
-                    <TextBlock Name="positiveBox" Text="{Binding Path=positive, UpdateSourceTrigger=Explicit}" />
+                    <TextBlock Name="DKpositiveBox" Text="{Binding Path=positive, UpdateSourceTrigger=Explicit}" />
                 </Border>
                 <Border Grid.Column="2">
-                    <TextBlock Name="testedBox" Text="{Binding Path=tested, UpdateSourceTrigger=Explicit}"/>
+                    <TextBlock Name="DKtestedBox" Text="{Binding Path=tested, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <Border Grid.Column="3">
-                    <TextBlock Name="percentagePositiveBox" Text="{Binding Path=percentagePositive, UpdateSourceTrigger=Explicit}"/>
+                    <TextBlock Name="DKpercentagePositiveBox" Text="{Binding Path=percentagePositive, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <Border Grid.Column="4">
-                    <TextBlock Name="hospitalizedBox" Text="{Binding Path=hospitalized, UpdateSourceTrigger=Explicit}"/>
+                    <TextBlock Name="DKhospitalizedBox" Text="{Binding Path=hospitalized, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <Border Grid.Column="5">
-                    <TextBlock Name="deathsBox" Text="{Binding Path=deaths, UpdateSourceTrigger=Explicit}"/>
+                    <TextBlock Name="DKdeathsBox" Text="{Binding Path=deaths, UpdateSourceTrigger=Explicit}"/>
                 </Border>
                 <!--Dataen selv row 2-->
                 <Border Grid.Column="1" Grid.Row="2">
-                    <TextBlock Text="0"/>
+                    <TextBlock Name="MCpositiveBox" />
                 </Border>
                 <Border Grid.Column="2" Grid.Row="2">
-                    <TextBlock Text="0"/>
+                    <TextBlock Name="MCTtestedBox"/>
                 </Border>
                 <Border Grid.Column="3" Grid.Row="2">
-                    <TextBlock Text="0"/>
+                    <TextBlock Name="MCpercentagePositiveBox"/>
                 </Border>
                 <Border Grid.Column="4" Grid.Row="2">
                     <TextBlock Text="0"/>
