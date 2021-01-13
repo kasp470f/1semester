@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
 using Applikationen.CoronaData;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Globalization;
-using System.Diagnostics;
 
 namespace Applikationen.Views.Pages
 {
@@ -54,25 +41,35 @@ namespace Applikationen.Views.Pages
             var coronaDataUsed = regionDataCSV.Last();
 
             double positive = coronaDataUsed.Positive;
-            positiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", positive);
+            DKpositiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", positive);
 
             double tested = coronaDataUsed.Tested;
-            testedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", tested);
+            DKtestedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", tested);
 
             double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
-            percentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
+            DKpercentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
 
             double hospitalized = coronaDataUsed.Hospitalized;
-            hospitalizedBox.Text = string.Format("{0}", hospitalized);
+            DKhospitalizedBox.Text = string.Format("{0}", hospitalized);
 
             double deaths = coronaDataUsed.Deaths;
-            deathsBox.Text = string.Format("{0}", deaths);
+            DKdeathsBox.Text = string.Format("{0}", deaths);
         }
 
         private void MunicipalityDataBinding()
         {
-            var MunicipalityDataCSV = municipalityPositive.ReadCSV(FolderPath + "\\Municipality_test_pos.csv");
+            var MunicipalityDataCSV = MunicipalityPositive.ReadCSV(FolderPath + "\\Municipality_test_pos.csv");
 
+            var coronaDataUsed = MunicipalityDataCSV.Single(Municipality => Municipality.Municipality == "Herlev");
+
+            double positive = coronaDataUsed.Positive;
+            MCpositiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", positive);
+
+            double tested = coronaDataUsed.Tested;
+            MCTtestedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", tested);
+
+            double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
+            MCpercentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
         }
     }
 }
