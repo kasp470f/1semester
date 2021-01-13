@@ -13,46 +13,58 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
-using Applikationen.CoronaDataFunctions;
 using Applikationen.CoronaData;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace Applikationen.Views.Pages
 {
-    /// <summary>
-    /// Interaction logic for FrontPage.xaml
-    /// </summary>
     public partial class FrontPage : Page
     {
+        public string FolderPath { get; set; }
+
+        public bool IndicatorStatus = true;
         public FrontPage()
         {
             InitializeComponent();
+            if (IndicatorStatus == true) Indicator.Style = FindResource("IndicatorGood") as Style;
+            else Indicator.Style = FindResource("IndicatorBad") as Style;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            
-            var regionDataCSV = RegionData.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Region_summary.csv");
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = (FolderPath == "") ? "C:\\Users" : FolderPath;
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                FolderPath = dialog.FileName;
+                csvPath.Text = FolderPath;
+            }
 
-            //var municipalityTestPosDataCSV = municipalityTestedTS.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Municipality_test_pos.csv");
+            RegionDataBinding();
+            MunicipalityDataBinding();
+        }
 
-            //var admittedNewDataCSV = RegionData.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Newly_admitted_over_time.csv");
+        private void RegionDataBinding()
+        {
+            var regionDataCSV = RegionData.ReadCSV(FolderPath + "\\Region_summary.csv");
 
-            //var deathsTimeDataCSV = RegionData.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Deaths_over_time.csv");
-
-            //var municipalityCTSregionDataCSV = RegionData.ReadCSV("C:\\Users\\Keemon\\Desktop\\coronadata\\Municipality_cases_time_series.csv");
-            
-
-            var coronaDataUsed = regionDataCSV.First();
+            var coronaDataUsed = regionDataCSV.Last();
 
             double positive = coronaDataUsed.Positive;
+<<<<<<< HEAD
             positiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", positive);
+=======
+            positiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", positive);
+>>>>>>> origin/develop
 
             double tested = coronaDataUsed.Tested;
-            testedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", tested);
+            testedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", tested);
 
             double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
+<<<<<<< HEAD
             percentagePositiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", percentagePositive);
 
             double hospitalized = coronaDataUsed.Hospitalized;
@@ -60,6 +72,21 @@ namespace Applikationen.Views.Pages
 
             double deaths = coronaDataUsed.Deaths;
             deathsBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:N}", deaths);
+=======
+            percentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
+
+            double hospitalized = coronaDataUsed.Hospitalized;
+            hospitalizedBox.Text = string.Format("{0}", hospitalized);
+
+            double deaths = coronaDataUsed.Deaths;
+            deathsBox.Text = string.Format("{0}", deaths);
+        }
+
+        private void MunicipalityDataBinding()
+        {
+            var MunicipalityDataCSV = municipalityPositive.ReadCSV(FolderPath + "\\Municipality_test_pos.csv");
+
+>>>>>>> origin/develop
         }
     }
 }

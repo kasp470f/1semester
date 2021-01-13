@@ -7,7 +7,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 
-namespace Applikationen.CoronaDataFunctions
+namespace Applikationen.CoronaData
 {
     // Keemon, Natasha, Nichlas
     public class RegionData
@@ -36,25 +36,21 @@ namespace Applikationen.CoronaDataFunctions
             // We try to open a file and check whether it is a csv
             string lines = File.ReadAllText(fileName);
 
-            // We split the csv data at each semicolon to have separate fields/rows
-            string[] data = lines.Split(new[] { ";", "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            // We split the csv data at each break line to make all rows be a single index in a array to split it later into more easier to deal with components
+            string[] dataLines = lines.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
-            var datalist = data.ToList();
-            datalist.RemoveRange(0, 5);
-            data = datalist.ToArray();
-            
-            for (int i = 0; i < data.Length; i++)
+            // We split the lines into fields and add them to a list.
+            for (int i = 1; i < dataLines.Length-1; i++)
             {
-                data[i] = data[i].Trim();
-                data[i] = data[i].Replace(".", "");
+                string[] data = dataLines[i].Split(';');
+                for (int j = 0; j < data.Length; j++)
+                {
+                    data[j] = data[j].Trim();
+                    data[j] = data[j].Replace(".", "");
+                }
+                listCSV.Add(new RegionData(data[0], double.Parse(data[1]), double.Parse(data[2]), double.Parse(data[3]), double.Parse(data[4])));
             }
-            
 
-            for (int i = 0; i < 35;)
-            {
-                listCSV.Add(new RegionData(data[i], double.Parse(data[i+1], System.Globalization.CultureInfo.InvariantCulture), double.Parse(data[i+2], System.Globalization.CultureInfo.InvariantCulture), double.Parse(data[i+3], System.Globalization.CultureInfo.InvariantCulture), double.Parse(data[i+4], System.Globalization.CultureInfo.InvariantCulture)));
-                i = i + 5;
-            }
             // We return CoronaData with the data in the following order: Region, Tested (Total values), Positive, Hospitalized, Deaths
             return listCSV;
         }
