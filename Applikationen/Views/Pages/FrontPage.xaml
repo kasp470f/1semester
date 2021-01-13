@@ -24,8 +24,7 @@
                     <ColumnDefinition Width="250"/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox Width="130" Height="23" Grid.Column="0" IsEditable="True" IsReadOnly="True" Text="Valg af kommune" FontWeight="SemiBold">
-                    <ComboBoxItem Content="kommuner her"/>
+                <ComboBox Name="municipalityBox" Width="130" Height="23" Grid.Column="0" IsEditable="True" IsReadOnly="True" Text="Valg af kommune" FontWeight="SemiBold">
                 </ComboBox>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
