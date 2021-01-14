@@ -3,7 +3,7 @@ GO
 
 INSERT INTO [dbo].[Municipalities] VALUES
 ('Roskilde'),
-('Copenhagen'),
+('København'),
 ('Aarhus'),
 ('Frederiksberg'),
 ('Kalundborg'),
