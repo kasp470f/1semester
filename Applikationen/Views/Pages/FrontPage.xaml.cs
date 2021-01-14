@@ -42,7 +42,10 @@ namespace Applikationen.Views.Pages
             }
 
             RegionDataBinding();
-            MunicipalityDataBinding();
+            if (MunicipalityChoosen != null)
+            {
+                MunicipalityDataBinding();
+            }
         }
 
         // Keemon & Natasha
@@ -78,10 +81,10 @@ namespace Applikationen.Views.Pages
                 var coronaDataUsed = regionDataCSV.Last();
 
                 double positive = coronaDataUsed.Positive;
-                DKpositiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", positive);
+                DKpositiveBox.Text = string.Format("{0:n}", positive);
 
                 double tested = coronaDataUsed.Tested;
-                DKtestedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", tested);
+                DKtestedBox.Text = string.Format("{0:n}", tested);
 
                 double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
                 DKpercentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
@@ -91,6 +94,7 @@ namespace Applikationen.Views.Pages
 
                 double deaths = coronaDataUsed.Deaths;
                 DKdeathsBox.Text = string.Format("{0}", deaths);
+                MessageBox.Show("Files uploaded successfully");
             }
             catch (System.Exception es)
             {
@@ -105,14 +109,13 @@ namespace Applikationen.Views.Pages
             {
                 var MunicipalityDataCSV = MunicipalityPositive.ReadCSV(FolderPath + "\\Municipality_test_pos.csv");
 
-                MunicipalityChoosen = municipalityBox.Text;
                 var coronaDataUsed = MunicipalityDataCSV.Single(Municipality => Municipality.Municipality == MunicipalityChoosen);
 
                 double positive = coronaDataUsed.Positive;
-                MCpositiveBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", positive);
+                MCpositiveBox.Text = string.Format("{0}", positive);
 
                 double tested = coronaDataUsed.Tested;
-                MCTtestedBox.Text = string.Format(CultureInfo.CreateSpecificCulture("da-DK"), "{0:n}", tested);
+                MCTtestedBox.Text = string.Format("{0}", tested);
 
                 double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
                 MCpercentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
