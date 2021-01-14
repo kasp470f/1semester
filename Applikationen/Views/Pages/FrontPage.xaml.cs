@@ -83,6 +83,7 @@ namespace Applikationen.Views.Pages
 
                 double deaths = coronaDataUsed.Deaths;
                 DKdeathsBox.Text = string.Format("{0}", deaths);
+                MessageBox.Show("Files uploaded successfully");
             }
             catch (System.Exception es)
             {
