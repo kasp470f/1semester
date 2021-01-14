@@ -12,12 +12,12 @@ namespace Applikationen.CoronaData
     {
         public string Municipality { get; set; }
 
-        public double Positive { get; set; }
+        public long Positive { get; set; }
 
-        public double Tested { get; set; }
+        public long Tested { get; set; }
 
         // For the Municipality_test_pos.csv data constructor
-        public MunicipalityPositive(string municipality, double tested, double positive)
+        public MunicipalityPositive(string municipality, long tested, long positive)
         {
             Municipality = municipality;
             Positive = positive;
@@ -38,7 +38,12 @@ namespace Applikationen.CoronaData
             for (int i = 1; i < dataLines.Length - 1; i++)
             {
                 string[] data = dataLines[i].Split(';');
-                listCSV.Add(new MunicipalityPositive(data[1], double.Parse(data[2]), double.Parse(data[3])));
+                for (int j = 0; j < data.Length; j++)
+                {
+                    data[j] = data[j].Replace(".", string.Empty);
+                }
+                Debug.WriteLine(data[1] + data[2] + data[3]);
+                listCSV.Add(new MunicipalityPositive(data[1], long.Parse(data[2]), long.Parse(data[3])));
             }
 
             return listCSV;
