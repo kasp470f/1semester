@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Applikationen.MunicipalityFunctions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,21 @@ namespace Applikationen.Views.Pages
         public RestrictionsPage()
         {
             InitializeComponent();
+
+            DisplayMunicipalities();
+        }
+
+        // Keemon & Natasha
+        public void DisplayMunicipalities()
+        {
+            Municipality municipality = new Municipality();
+
+            List<ComboBoxItem> items = municipality.GetMunicipalityList();
+
+            foreach (var item in items)
+            {
+                municipalityBox.Items.Add(item);
+            }
         }
     }
 }
