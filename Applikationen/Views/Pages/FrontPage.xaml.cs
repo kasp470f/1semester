@@ -1,4 +1,5 @@
 ﻿using Applikationen.CoronaData;
+using Applikationen.DatabaseClasses;
 using Applikationen.MunicipalityFunctions;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Collections.Generic;
@@ -57,6 +58,16 @@ namespace Applikationen.Views.Pages
             }
         }
 
+        public void DisplayMunicipalityRestrictions()
+        {
+            Municipality municipality = new Municipality();
+            List<IndustryRestriction> restrictions = municipality.DisplayMunicipalityRestrictions(MunicipalityChoosen);
+
+            foreach (IndustryRestriction ir in restrictions)
+            {
+                FrontPageIR.Items.Add(ir);
+            }
+        }
 
         private void RegionDataBinding()
         {
@@ -116,6 +127,7 @@ namespace Applikationen.Views.Pages
         private void MunicipalityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MunicipalityChoosen = municipalityBox.SelectedValue.ToString();
+            DisplayMunicipalityRestrictions();
             if (FolderPath != string.Empty)
             {
                 MunicipalityDataBinding();
