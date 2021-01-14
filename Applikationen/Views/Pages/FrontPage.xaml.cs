@@ -41,7 +41,7 @@ namespace Applikationen.Views.Pages
             }
 
             RegionDataBinding();
-            if (MunicipalityChoosen != string.Empty)
+            if (MunicipalityChoosen != null)
             {
                 MunicipalityDataBinding();
             }
