@@ -100,7 +100,6 @@ namespace Applikationen.Views.Pages
             {
                 MessageBox.Show(es.Message);
             }
-
         }
 
         private void MunicipalityDataBinding()
