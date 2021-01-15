@@ -100,7 +100,6 @@ namespace Applikationen.Views.Pages
             {
                 MessageBox.Show(es.Message);
             }
-
         }
 
         private void MunicipalityDataBinding()
@@ -111,14 +110,30 @@ namespace Applikationen.Views.Pages
 
                 var coronaDataUsed = MunicipalityDataCSV.Single(Municipality => Municipality.Municipality == MunicipalityChoosen);
 
-                double positive = coronaDataUsed.Positive;
+                long positive = coronaDataUsed.Positive;
                 MCpositiveBox.Text = string.Format("{0}", positive);
 
-                double tested = coronaDataUsed.Tested;
+                long tested = coronaDataUsed.Tested;
                 MCTtestedBox.Text = string.Format("{0}", tested);
 
                 double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
                 MCpercentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
+
+                Municipality municipality = new Municipality();
+                List<Municipality> municipalitiesRegion = municipality.GetMunicipalityFullList();
+
+                var coronaDataUsedRegion = municipalitiesRegion.Single(Municipality => Municipality.Name == MunicipalityChoosen);
+
+                var regionCSV = RegionData.ReadCSV(FolderPath + "\\Region_summary.csv");
+
+                var regionDataUsed = regionCSV.Single(Region => Region.Region == coronaDataUsedRegion.Region);
+
+                double hospitalized = regionDataUsed.Hospitalized;
+                MChospitalizedBox.Text = string.Format("{0}", hospitalized);
+
+                double deaths = regionDataUsed.Deaths;
+                MCdeathsBox.Text = string.Format("{0}", deaths);
+
             }
             catch (System.Exception es)
             {

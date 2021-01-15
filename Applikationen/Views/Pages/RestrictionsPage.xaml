@@ -59,11 +59,14 @@
             </Grid>
             
             <Grid Grid.Row="2">
-                <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,0,40,0">
-                    <Label Content="Industrier med påførte restriktioner" Grid.Column="1"/>
-                    <TextBox Text="Søg i industri restriktioner..."></TextBox>
-                    <ListBox Height="auto" MinHeight="100"></ListBox>
-                </StackPanel>
+                <DataGrid Name="RestrictionsPageIR" ItemsSource="{Binding}" Width="auto" Height="auto" Margin="30,0,30,20">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Restriktioner" Binding="{Binding R_Text}" Width="0.7*"/>
+                        <DataGridTextColumn Header="Start Dato" Binding="{Binding RI_StartDate}" Width="0.5*"/>
+                        <DataGridTextColumn Header="Slut Dato" Binding="{Binding RI_EndDate}" Width="0.5*"/>
+                        <DataGridTextColumn Header="Industri" Binding="{Binding I_Name}" Width="3*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
 
             </Grid>
         </Grid>
