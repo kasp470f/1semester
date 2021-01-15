@@ -13,7 +13,8 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
-                <RowDefinition Height="auto" MinHeight="180" MaxHeight="300"/>
+                <RowDefinition Height="*" MinHeight="180" MaxHeight="450"/>
+                <RowDefinition Height="25" />
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -32,34 +33,34 @@
                     <ColumnDefinition Width="1.6*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Vertical" Grid.Column="0" Margin="10,0,80,0">
+                <StackPanel Orientation="Vertical" Grid.Column="0" Margin="30,0,40,0" MinHeight="100" MaxHeight="450">
                     <Label Content="Restriktioner" Grid.Column="0"/>
                     <TextBox Text="Søg i restriktioner..."></TextBox>
-                    <DataGrid Name="RestrictionBox" Width="auto" Height="auto" MinHeight="100" MaxHeight="100" ScrollViewer.CanContentScroll="True">
+                    <DataGrid Name="RestrictionBox" Width="auto" Height="100" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding R_Text}" Width="0.7*"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="TILFØJ RESTRIKTIONER" Height="23" Margin="0,5,0,0" Width="140"></Button>
                 </StackPanel>
 
-                
-
-                <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,0,40,0">
+                <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,0,30,0">
                     <Label Content="Industrier" Grid.Column="1"/>
                     <TextBox Text="Søg i industrier..."></TextBox>
-                    <DataGrid Name="IndustryBox" Width="auto" Height="auto" MinHeight="100" MaxHeight="100" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                    <DataGrid Name="IndustryBox" Width="auto" Height="100" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.CanContentScroll="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding I_Name}" Width="0.7*"/>
-                            <DataGridTextColumn Binding="{Binding I_Code}" Width="0.7*" MaxWidth="100"/>
-                            <DataGridTextColumn Binding="{Binding I_Description}" Width="0.7*"/>
+                            <DataGridTextColumn Binding="{Binding I_Name}" Width="auto"/>
+                            <DataGridTextColumn Binding="{Binding I_Code}" Width="auto"/>
+                            <DataGridTextColumn Binding="{Binding I_Description}" Width="auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
             </Grid>
-            
-            <Grid Grid.Row="2">
-                <DataGrid Name="RestrictionsPageIR" ItemsSource="{Binding}" Width="auto" Height="auto" Margin="30,0,30,20">
+
+            <Button Content="TILFØJ RESTRIKTIONER" Height="23" Width="140" Grid.Row="2" HorizontalAlignment="Left" Margin="80,0,0,0"/>
+
+            <Grid Grid.Row="3" Margin="0,5,0,0">
+                <TextBox Text="Søg i restriktioner..." Margin="30,0,30,20"></TextBox>
+                <DataGrid Name="RestrictionsPageIR" ItemsSource="{Binding}" Width="auto" Height="auto" Margin="30,20,30,10">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Restriktioner" Binding="{Binding R_Text}" Width="0.7*"/>
                         <DataGridTextColumn Header="Start Dato" Binding="{Binding RI_StartDate}" Width="0.5*"/>
@@ -67,7 +68,6 @@
                         <DataGridTextColumn Header="Industri" Binding="{Binding I_Name}" Width="3*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-
             </Grid>
         </Grid>
     </Grid>
