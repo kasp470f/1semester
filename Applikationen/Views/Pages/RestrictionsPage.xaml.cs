@@ -1,4 +1,5 @@
-﻿using Applikationen.MunicipalityFunctions;
+﻿using Applikationen.DatabaseClasses;
+using Applikationen.MunicipalityFunctions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace Applikationen.Views.Pages
             InitializeComponent();
 
             DisplayMunicipalities();
+            DisplayRestrictions();
+            DisplayIndustries();
         }
 
         // Keemon & Natasha
@@ -41,6 +44,26 @@ namespace Applikationen.Views.Pages
             }
         }
 
+        public void DisplayRestrictions()
+        {
+            Restriction restriction = new Restriction();
+            List<Restriction> restrictions = restriction.GetRestriction();
 
+            foreach (Restriction r in restrictions)
+            {
+                RestrictionBox.Items.Add(r);
+            }
+        }
+
+        public void DisplayIndustries()
+        {
+            Industry industry = new Industry();
+            List<Industry> industries = industry.GetIndustry();
+
+            foreach (Industry i in industries)
+            {
+                IndustryBox.Items.Add(i);
+            }
+        }
     }
 }
