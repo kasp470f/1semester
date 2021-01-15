@@ -36,8 +36,9 @@
                 <StackPanel Orientation="Vertical" Grid.Column="0" Margin="30,0,40,0" MinHeight="100" MaxHeight="450">
                     <Label Content="Restriktioner" Grid.Column="0"/>
                     <TextBox Text="Søg i restriktioner..."></TextBox>
-                    <DataGrid Name="RestrictionBox" Width="auto" Height="100" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <DataGrid Name="RestrictionDataGrid" Width="auto" Height="130" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" GotFocus="GotFocus" IsReadOnly="True">
                         <DataGrid.Columns>
+                            <DataGridCheckBoxColumn x:Name="RestrictionCheckBox"/>
                             <DataGridTextColumn Binding="{Binding R_Text}" Width="0.7*"/>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -46,8 +47,9 @@
                 <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,0,30,0">
                     <Label Content="Industrier" Grid.Column="1"/>
                     <TextBox Text="Søg i industrier..."></TextBox>
-                    <DataGrid Name="IndustryBox" Width="auto" Height="100" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.CanContentScroll="True">
+                    <DataGrid Name="IndustryDataGrid" Width="auto" Height="130" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.CanContentScroll="True" GotFocus="GotFocus" IsReadOnly="True">
                         <DataGrid.Columns>
+                            <DataGridCheckBoxColumn x:Name="IndustryCheckBox" IsReadOnly="true"/>
                             <DataGridTextColumn Binding="{Binding I_Name}" Width="auto"/>
                             <DataGridTextColumn Binding="{Binding I_Code}" Width="auto"/>
                             <DataGridTextColumn Binding="{Binding I_Description}" Width="auto"/>
@@ -56,7 +58,7 @@
                 </StackPanel>
             </Grid>
 
-            <Button Content="TILFØJ RESTRIKTIONER" Height="23" Width="140" Grid.Row="2" HorizontalAlignment="Left" Margin="80,0,0,0"/>
+            <Button Content="TILFØJ RESTRIKTIONER" Height="23" Width="140" Grid.Row="2" HorizontalAlignment="Left" Margin="80,0,0,0" Click="Button_Click"/>
 
             <Grid Grid.Row="3" Margin="0,5,0,0">
                 <TextBox Text="Søg i restriktioner..." Margin="30,0,30,20"></TextBox>
