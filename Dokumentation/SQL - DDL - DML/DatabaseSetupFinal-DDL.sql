@@ -12,6 +12,7 @@ GO
 CREATE TABLE [Municipalities] (
     [M_ID] int IDENTITY(1,1) NOT NULL ,
     [M_Name] varchar(200)  NOT NULL ,
+	[M_Region] varchar(200) NOT NULL,
     CONSTRAINT [PK_Municipalities] PRIMARY KEY CLUSTERED (
         [M_ID] ASC
     )
