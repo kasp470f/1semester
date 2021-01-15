@@ -52,7 +52,6 @@
                     <TextBox Text="Søg i industri restriktioner..."></TextBox>
                     <ListBox Height="auto" MinHeight="100"></ListBox>
                 </StackPanel>
-
             </Grid>
         </Grid>
     </Grid>
