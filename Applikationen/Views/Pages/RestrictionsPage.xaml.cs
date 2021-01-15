@@ -1,19 +1,8 @@
 ﻿using Applikationen.DatabaseClasses;
 using Applikationen.MunicipalityFunctions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Applikationen.Views.Pages
 {
@@ -51,7 +40,7 @@ namespace Applikationen.Views.Pages
 
             foreach (Restriction r in restrictions)
             {
-                RestrictionBox.Items.Add(r);
+                RestrictionDataGrid.Items.Add(r);
             }
         }
 
@@ -62,7 +51,7 @@ namespace Applikationen.Views.Pages
 
             foreach (Industry i in industries)
             {
-                IndustryBox.Items.Add(i);
+                IndustryDataGrid.Items.Add(i);
             }
         }
     }
