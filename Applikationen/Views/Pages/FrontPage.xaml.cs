@@ -72,6 +72,7 @@ namespace Applikationen.Views.Pages
             }
         }
 
+        //Kasper 
         private void RegionDataBinding()
         {
             try
@@ -102,6 +103,7 @@ namespace Applikationen.Views.Pages
             }
         }
 
+        //Kasper 
         private void MunicipalityDataBinding()
         {
             try
@@ -141,7 +143,7 @@ namespace Applikationen.Views.Pages
             }
         }
 
-
+        //Kasper 
         private void MunicipalityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MunicipalityChoosen = municipalityBox.SelectedValue.ToString();
