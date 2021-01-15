@@ -98,11 +98,12 @@
                 </Border>
             </Grid>
 
-            <DataGrid Width="auto" Height="auto" Grid.Row="2" Margin="30,0,30,20">
+            <DataGrid Name="FrontPageIR" ItemsSource="{Binding}" Width="auto" Height="auto" Grid.Row="2" Margin="30,0,30,20">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Restriktion" Width="0.7*"/>
-                    <DataGridTextColumn Header="Kode" Width="0.5*"/>
-                    <DataGridTextColumn Header="Erhverv" Width="3*"/>
+                    <DataGridTextColumn Header="Restriktioner" Binding="{Binding R_Text}" Width="0.7*"/>
+                    <DataGridTextColumn Header="Start Dato" Binding="{Binding RI_StartDate}" Width="0.5*"/>
+                    <DataGridTextColumn Header="Slut Dato" Binding="{Binding RI_EndDate}" Width="0.5*"/>
+                    <DataGridTextColumn Header="Industri" Binding="{Binding I_Name}" Width="3*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
