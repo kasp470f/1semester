@@ -38,6 +38,14 @@
                     <TextBox Text="Søg i restriktioner..."></TextBox>
                     <DataGrid Name="RestrictionBox" Width="auto" Height="100" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
                             <DataGridTextColumn Binding="{Binding R_Text}" Width="0.7*"/>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -48,6 +56,14 @@
                     <TextBox Text="Søg i industrier..."></TextBox>
                     <DataGrid Name="IndustryBox" Width="auto" Height="100" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.CanContentScroll="True">
                         <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
                             <DataGridTextColumn Binding="{Binding I_Name}" Width="auto"/>
                             <DataGridTextColumn Binding="{Binding I_Code}" Width="auto"/>
                             <DataGridTextColumn Binding="{Binding I_Description}" Width="auto"/>
