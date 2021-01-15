@@ -50,12 +50,6 @@ namespace Applikationen.CoronaData
         }
 
 
-        private void MunicipalityRegion()
-        {
-
-        }
-
-
         // ----------------
         // Helper functions
         // ----------------
