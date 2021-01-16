@@ -34,13 +34,13 @@ namespace Applikationen.DatabaseClasses
         // Natasha
         // Method to get industries from database
         public void DeleteIndustryRestriction(List<IndustryRestriction> list)
-		{
+        {
             // We open the connection to the database
             SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["post"].ConnectionString);
-			try
-			{
-				cnn.Open();
-				SqlDataAdapter adapter = new SqlDataAdapter();
+            try
+            {
+                cnn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
                 foreach (IndustryRestriction item in list)
                 {
                     // Select R_ID
@@ -53,23 +53,6 @@ namespace Applikationen.DatabaseClasses
                         while (dataReader.Read())
                         {
                             item.RI_R_ID = Convert.ToInt32(dataReader.GetValue(0));
-                        }
-
-                        // We delete the command and close the connection
-                        dataReader.Close();
-                        command.Dispose();
-                    }
-
-                    // Select I_ID
-                    string sql2 = "SELECT * FROM Industries WHERE I_Name = '" + item.I_Name + "'";
-
-                    using (SqlCommand command = new SqlCommand(sql2, cnn))
-                    {
-                        var dataReader = command.ExecuteReader();
-
-                        while (dataReader.Read())
-                        {
-                            item.RI_I_ID = Convert.ToInt32(dataReader.GetValue(0));
                         }
 
                         // We delete the command and close the connection
@@ -127,14 +110,14 @@ namespace Applikationen.DatabaseClasses
 
                 MessageBox.Show("De(n) valgte restriktion(er) på industri(er) er nu fjernet.");
             }
-			catch (Exception e)
-			{
-				MessageBox.Show("Database forbindelsen kunne ikke oprettes\n\nSystem fejlbesked:\n" + e.Message);
-			}
-			finally
-			{
-				if (cnn != null && cnn.State == ConnectionState.Open) cnn.Close();
-			}
+            catch (Exception e)
+            {
+                MessageBox.Show("Database forbindelsen kunne ikke oprettes\n\nSystem fejlbesked:\n" + e.Message);
+            }
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open) cnn.Close();
+            }
         }
 
         public void InsertIndustryRestriction(List<IndustryRestriction> list)
@@ -225,4 +208,3 @@ namespace Applikationen.DatabaseClasses
         }
     }
 }
-
