@@ -43,6 +43,20 @@
             </Style.Resources>
         </Style>
 
+        <Style TargetType="StackPanel" x:Key="IndicatorNoChoice">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="#EF4343"/>
+                    <Setter Property="BorderBrush" Value="#B40707"/>
+                    <Style.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Text" Value="Ingen kommune valgt"/>
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </Style.Resources>
+        </Style>
+
 
         <!--Stylen til Grid for data om COVID på forsiden-->
         <Style TargetType="Grid" x:Key="DataResources">

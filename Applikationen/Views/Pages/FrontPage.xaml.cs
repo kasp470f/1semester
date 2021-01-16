@@ -26,8 +26,7 @@ namespace Applikationen.Views.Pages
             // Displays municipalities in dropdown menu/combobox
             DisplayMunicipalities();
             FolderPath = string.Empty;
-            if (IndicatorStatus == true) Indicator.Style = FindResource("IndicatorGood") as Style;
-            else Indicator.Style = FindResource("IndicatorBad") as Style;
+            Indicator.Style = FindResource("IndicatorNoChoice") as Style;
         }
 
         private void UploadButton_Click(object sender, RoutedEventArgs e)
@@ -89,6 +88,7 @@ namespace Applikationen.Views.Pages
 
                 double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
                 DKpercentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
+                
 
                 double hospitalized = coronaDataUsed.Hospitalized;
                 DKhospitalizedBox.Text = string.Format("{0}", hospitalized);
@@ -120,6 +120,14 @@ namespace Applikationen.Views.Pages
 
                 double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
                 MCpercentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
+                if (percentagePositive > 2)
+                {
+                    Indicator.Style = FindResource("IndicatorBad") as Style;
+                }
+                else if (percentagePositive < 2)
+                {
+                    Indicator.Style = FindResource("IndicatorGood") as Style;
+                }
 
                 Municipality municipality = new Municipality();
                 List<Municipality> municipalitiesRegion = municipality.GetMunicipalityFullList();
