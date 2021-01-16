@@ -12,7 +12,7 @@ namespace Applikationen.Views.Pages
     /// </summary>
     public partial class RestrictionsPage : Page
     {
-        private string municipalitySelected { get; set; }
+        public string MunicipalityChoosen { get; set; }
 
         public RestrictionsPage()
         {
@@ -21,6 +21,7 @@ namespace Applikationen.Views.Pages
             DisplayMunicipalities();
             DisplayRestrictions();
             DisplayIndustries();
+            DisplayMunicipalityRestrictions();
         }
 
         // Keemon & Natasha
@@ -98,16 +99,18 @@ namespace Applikationen.Views.Pages
                 }
                 if (isCheckedI.IsChecked == true)
                 {
-                    DateTime startDateText = new DateTime(2008, 5, 1, 8, 30, 52);
-                    DateTime endDateText = new DateTime(2008, 5, 1, 8, 30, 52);
+                    string startDateText = DateTime.Now.ToString("yyyy/MM/dd");
+                    string endDateText = DateTime.Now.ToString("yyyy/MM/dd");
+                    TextBlock restrictionText = RestrictionDataGrid.Columns[1].GetCellContent(RestrictionDataGrid.Items[i]) as TextBlock;
                     TextBlock industryText = IndustryDataGrid.Columns[1].GetCellContent(IndustryDataGrid.Items[i]) as TextBlock;
                     industriesJoinText.Add(industryText.Text);
                     industryRestrictions.Add(new IndustryRestriction()
                     {
-                        R_Text = string.Join(", ", restrictionsJoinText),
+                        R_Text = restrictionText.Text,
                         RI_StartDate = startDateText,
                         RI_EndDate = endDateText,
-                        I_Name = industryText.Text
+                        I_Name = industryText.Text,
+                        M_Name = MunicipalityChoosen
                     });
                 }
             }
@@ -115,6 +118,13 @@ namespace Applikationen.Views.Pages
             ResctrictionsChoosen.Text = string.Join(", ", restrictionsJoinText);
             IndustriesChoosen.Text = string.Join(", ", industriesJoinText);
 
+            IndustryRestriction irInsert = new IndustryRestriction();
+            irInsert.InsertIndustryRestriction(industryRestrictions);
+
+            RestrictionsPageIR.Items.Clear();
+            RestrictionsPageIR.Items.Refresh();
+
+            DisplayMunicipalityRestrictions();
         }
 
         // Kasper
@@ -133,10 +143,59 @@ namespace Applikationen.Views.Pages
             }
         }
 
+        public void DisplayMunicipalityRestrictions()
+        {
+            Municipality municipality = new Municipality();
+            List<IndustryRestriction> restrictions = municipality.DisplayMunicipalityRestrictions(MunicipalityChoosen);
+
+            foreach (IndustryRestriction ir in restrictions)
+            {
+                RestrictionsPageIR.Items.Add(ir);
+            }
+        }
+
         //Kasper 
         private void MunicipalityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            municipalitySelected = MunicipalityBox.SelectedValue.ToString();
+            MunicipalityChoosen = municipalityBox.SelectedValue.ToString();
+            DisplayMunicipalityRestrictions();
+        }
+
+        public void DeleteIndustryRestrictions_Click()
+        {
+            IndustryRestriction iRes = new IndustryRestriction();
+            List<IndustryRestriction> list = new List<IndustryRestriction>();
+
+            Municipality municipality = new Municipality();
+            List<IndustryRestriction> restrictions = municipality.DisplayMunicipalityRestrictions(MunicipalityChoosen);
+
+            for (int i = 0; i < restrictions.Count; i++)
+            {
+                CheckBox isCheckedI = RestrictionsPageIR.Columns[0].GetCellContent(RestrictionsPageIR.Items[i]) as CheckBox;
+                if (isCheckedI == null)
+                {
+                    isCheckedI = new CheckBox();
+                }
+                if (isCheckedI.IsChecked == true)
+                {
+                    TextBlock industryName = RestrictionsPageIR.Columns[4].GetCellContent(RestrictionsPageIR.Items[i]) as TextBlock;
+                    TextBlock restrictionText = RestrictionsPageIR.Columns[1].GetCellContent(RestrictionsPageIR.Items[i]) as TextBlock;
+                    list.Add(new IndustryRestriction()
+                    {
+                        R_Text = restrictionText.Text,
+                        I_Name = industryName.Text,
+                        M_Name = MunicipalityChoosen
+                    });
+                }
+            }
+
+            iRes.DeleteIndustryRestriction(list);
+
+            RestrictionsPageIR.Columns.Clear();
+            RestrictionsPageIR.Items.Clear();
+            RestrictionsPageIR.Items.Refresh();
+
+            DisplayMunicipalityRestrictions();
         }
     }
 }

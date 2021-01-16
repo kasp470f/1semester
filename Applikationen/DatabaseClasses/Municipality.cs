@@ -158,8 +158,8 @@ namespace Applikationen.MunicipalityFunctions
                                         RI_I_ID = Convert.ToInt32(dataReader2.GetValue(2)),
                                         RI_M_ID = Convert.ToInt32(dataReader2.GetValue(3)),
                                         RI_R_ID = Convert.ToInt32(dataReader2.GetValue(4)),
-                                        RI_StartDate = Convert.ToDateTime(dataReader2.GetValue(5)),
-                                        RI_EndDate = Convert.ToDateTime(dataReader2.GetValue(6))
+                                        RI_StartDate = Convert.ToString(dataReader2.GetValue(5)),
+                                        RI_EndDate = Convert.ToString(dataReader2.GetValue(6))
                                     });
                                 }
                                 dataReader2.Close();
