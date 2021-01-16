@@ -12,9 +12,12 @@ namespace Applikationen.Views.Pages
     /// </summary>
     public partial class RestrictionsPage : Page
     {
+        private string municipalitySelected { get; set; }
+
         public RestrictionsPage()
         {
             InitializeComponent();
+            municipalitySelected = string.Empty;
 
             DisplayMunicipalities();
             DisplayRestrictions();
@@ -30,10 +33,11 @@ namespace Applikationen.Views.Pages
 
             foreach (var item in items)
             {
-                municipalityBox.Items.Add(item);
+                MunicipalityBox.Items.Add(item);
             }
         }
 
+        // Keemon & Natasha
         public void DisplayRestrictions()
         {
             Restriction restriction = new Restriction();
@@ -45,6 +49,7 @@ namespace Applikationen.Views.Pages
             }
         }
 
+        // Keemon & Natasha
         public void DisplayIndustries()
         {
             Industry industry = new Industry();
@@ -69,45 +74,50 @@ namespace Applikationen.Views.Pages
 
             List<string> restrictionsJoinText = new List<string>();
 
-            for (int i = 0; i < restrictions.Count; i++)
+            if (municipalitySelected != string.Empty)
             {
-                CheckBox isCheckedR = RestrictionDataGrid.Columns[0].GetCellContent(RestrictionDataGrid.Items[i]) as CheckBox;
-                if (isCheckedR == null)
-                {
-                    isCheckedR = new CheckBox();
-                }
-                if(isCheckedR.IsChecked == true)
-                {
-                    TextBlock restrictionText = RestrictionDataGrid.Columns[1].GetCellContent(RestrictionDataGrid.Items[i]) as TextBlock;
-                    restrictionsJoinText.Add(restrictionText.Text);
-                }
 
-            }
-
-            for (int i = 0; i < industries.Count; i++)
-            {
-                CheckBox isCheckedI = IndustryDataGrid.Columns[0].GetCellContent(IndustryDataGrid.Items[i]) as CheckBox;
-                if (isCheckedI == null)
+                for (int i = 0; i < restrictions.Count; i++)
                 {
-                    isCheckedI = new CheckBox();
-                }
-                if (isCheckedI.IsChecked == true)
-                {
-                    DateTime startDateText = new DateTime(2008, 5, 1, 8, 30, 52);
-                    DateTime endDateText = new DateTime(2008, 5, 1, 8, 30, 52);
-                    TextBlock industryText = IndustryDataGrid.Columns[1].GetCellContent(IndustryDataGrid.Items[i]) as TextBlock;
-                    industryRestrictions.Add(new IndustryRestriction()
+                    CheckBox isCheckedR = RestrictionDataGrid.Columns[0].GetCellContent(RestrictionDataGrid.Items[i]) as CheckBox;
+                    if (isCheckedR == null)
                     {
-                        R_Text = string.Join(", ", restrictionsJoinText),
-                        RI_StartDate = startDateText,
-                        RI_EndDate = endDateText,
-                        I_Name = industryText.Text
-                    });
+                        isCheckedR = new CheckBox();
+                    }
+                    if (isCheckedR.IsChecked == true)
+                    {
+                        TextBlock restrictionText = RestrictionDataGrid.Columns[1].GetCellContent(RestrictionDataGrid.Items[i]) as TextBlock;
+                        restrictionsJoinText.Add(restrictionText.Text);
+                    }
+
                 }
 
+                for (int i = 0; i < industries.Count; i++)
+                {
+                    CheckBox isCheckedI = IndustryDataGrid.Columns[0].GetCellContent(IndustryDataGrid.Items[i]) as CheckBox;
+                    if (isCheckedI == null)
+                    {
+                        isCheckedI = new CheckBox();
+                    }
+                    if (isCheckedI.IsChecked == true)
+                    {
+                        DateTime startDateText = new DateTime(2008, 5, 1, 8, 30, 52);
+                        DateTime endDateText = new DateTime(2008, 5, 1, 8, 30, 52);
+                        TextBlock industryText = IndustryDataGrid.Columns[1].GetCellContent(IndustryDataGrid.Items[i]) as TextBlock;
+                        industryRestrictions.Add(new IndustryRestriction()
+                        {
+                            R_Text = string.Join(", ", restrictionsJoinText),
+                            RI_StartDate = startDateText,
+                            RI_EndDate = endDateText,
+                            I_Name = industryText.Text,
+                            RI_M_ID = municipalitySelected
+                        });
+                    }
+                }
             }
         }
 
+        // Kasper
         private new void GotFocus(object sender, RoutedEventArgs e)
         {
             var sen = sender as DataGrid;
@@ -121,6 +131,12 @@ namespace Applikationen.Views.Pages
                     chkBox.IsChecked = !chkBox.IsChecked;
                 }
             }
+        }
+
+        //Kasper 
+        private void MunicipalityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            municipalitySelected = MunicipalityBox.SelectedValue.ToString();
         }
     }
 }
