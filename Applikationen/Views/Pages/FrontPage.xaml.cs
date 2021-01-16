@@ -18,7 +18,7 @@ namespace Applikationen.Views.Pages
 
         public bool IndicatorStatus = true;
 
-
+        // Kasper, Keemon & Natasha
         public FrontPage()
         {
             InitializeComponent();
@@ -29,6 +29,7 @@ namespace Applikationen.Views.Pages
             Indicator.Style = FindResource("IndicatorNoChoice") as Style;
         }
 
+        // Kasper
         private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
@@ -60,6 +61,8 @@ namespace Applikationen.Views.Pages
             }
         }
 
+
+        // Keemon & Natasha
         public void DisplayMunicipalityRestrictions()
         {
             Municipality municipality = new Municipality();

@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Applikationen.DatabaseClasses
-{
+{    
     public class IndustryRestriction
     {
-        // We define IndustryRestriction variables
         public int RI_ID { get; set; }
         public int RI_R_ID { get; set; }
         public int RI_M_ID { get; set; }

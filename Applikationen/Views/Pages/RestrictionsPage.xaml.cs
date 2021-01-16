@@ -2,7 +2,6 @@
 using Applikationen.MunicipalityFunctions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -34,10 +33,11 @@ namespace Applikationen.Views.Pages
 
             foreach (var item in items)
             {
-                municipalityBox.Items.Add(item);
+                MunicipalityBox.Items.Add(item);
             }
         }
 
+        // Keemon & Natasha
         public void DisplayRestrictions()
         {
             Restriction restriction = new Restriction();
@@ -49,6 +49,7 @@ namespace Applikationen.Views.Pages
             }
         }
 
+        // Keemon & Natasha
         public void DisplayIndustries()
         {
             Industry industry = new Industry();
@@ -72,6 +73,7 @@ namespace Applikationen.Views.Pages
             List<IndustryRestriction> industryRestrictions = new List<IndustryRestriction>();
 
             List<string> restrictionsJoinText = new List<string>();
+            List<string> industriesJoinText = new List<string>();
 
             for (int i = 0; i < restrictions.Count; i++)
             {
@@ -80,7 +82,7 @@ namespace Applikationen.Views.Pages
                 {
                     isCheckedR = new CheckBox();
                 }
-                if(isCheckedR.IsChecked == true)
+                if (isCheckedR.IsChecked == true)
                 {
                     TextBlock restrictionText = RestrictionDataGrid.Columns[1].GetCellContent(RestrictionDataGrid.Items[i]) as TextBlock;
                     restrictionsJoinText.Add(restrictionText.Text);
@@ -101,6 +103,7 @@ namespace Applikationen.Views.Pages
                     string endDateText = DateTime.Now.ToString("yyyy/MM/dd");
                     TextBlock restrictionText = RestrictionDataGrid.Columns[1].GetCellContent(RestrictionDataGrid.Items[i]) as TextBlock;
                     TextBlock industryText = IndustryDataGrid.Columns[1].GetCellContent(IndustryDataGrid.Items[i]) as TextBlock;
+                    industriesJoinText.Add(industryText.Text);
                     industryRestrictions.Add(new IndustryRestriction()
                     {
                         R_Text = restrictionText.Text,
@@ -119,7 +122,12 @@ namespace Applikationen.Views.Pages
 
             DisplayMunicipalityRestrictions();
         }
+            ResctrictionsChoosen.Text = string.Join(", ", restrictionsJoinText);
+            IndustriesChoosen.Text = string.Join(", ", industriesJoinText);
 
+        }
+
+        // Kasper
         private new void GotFocus(object sender, RoutedEventArgs e)
         {
             var sen = sender as DataGrid;
