@@ -167,7 +167,7 @@ namespace Applikationen.MunicipalityFunctions
 
                                 foreach (DatabaseClasses.IndustryRestriction ir in industriesRestrictions)
                                 {
-                                    string sql3 = "SELECT * FROM Industries WHERE I_ID LIKE '%" + ir.RI_I_ID + "%'";
+                                    string sql3 = "SELECT * FROM Industries WHERE I_ID LIKE " + ir.RI_I_ID + "";
                                     using (SqlCommand command3 = new SqlCommand(sql3, cnn))
                                     {
                                         var dataReader3 = command3.ExecuteReader();
@@ -182,8 +182,8 @@ namespace Applikationen.MunicipalityFunctions
                                         command3.Dispose();
                                     }
 
-                                    string sql4 = "SELECT * FROM Restrictions WHERE R_ID LIKE '%" + ir.RI_R_ID + "%'";
-                                    using (SqlCommand command4 = new SqlCommand(sql3, cnn))
+                                    string sql4 = "SELECT * FROM Restrictions WHERE R_ID LIKE " + ir.RI_R_ID + "";
+                                    using (SqlCommand command4 = new SqlCommand(sql4, cnn))
                                     {
                                         var dataReader4 = command4.ExecuteReader();
                                         while (dataReader4.Read())
