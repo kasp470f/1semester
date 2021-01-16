@@ -17,7 +17,6 @@ namespace Applikationen.Views.Pages
         public RestrictionsPage()
         {
             InitializeComponent();
-            municipalitySelected = string.Empty;
 
             DisplayMunicipalities();
             DisplayRestrictions();
@@ -73,48 +72,49 @@ namespace Applikationen.Views.Pages
             List<IndustryRestriction> industryRestrictions = new List<IndustryRestriction>();
 
             List<string> restrictionsJoinText = new List<string>();
+            List<string> industriesJoinText = new List<string>();
 
-            if (municipalitySelected != string.Empty)
+            for (int i = 0; i < restrictions.Count; i++)
             {
-
-                for (int i = 0; i < restrictions.Count; i++)
+                CheckBox isCheckedR = RestrictionDataGrid.Columns[0].GetCellContent(RestrictionDataGrid.Items[i]) as CheckBox;
+                if (isCheckedR == null)
                 {
-                    CheckBox isCheckedR = RestrictionDataGrid.Columns[0].GetCellContent(RestrictionDataGrid.Items[i]) as CheckBox;
-                    if (isCheckedR == null)
-                    {
-                        isCheckedR = new CheckBox();
-                    }
-                    if (isCheckedR.IsChecked == true)
-                    {
-                        TextBlock restrictionText = RestrictionDataGrid.Columns[1].GetCellContent(RestrictionDataGrid.Items[i]) as TextBlock;
-                        restrictionsJoinText.Add(restrictionText.Text);
-                    }
-
+                    isCheckedR = new CheckBox();
+                }
+                if (isCheckedR.IsChecked == true)
+                {
+                    TextBlock restrictionText = RestrictionDataGrid.Columns[1].GetCellContent(RestrictionDataGrid.Items[i]) as TextBlock;
+                    restrictionsJoinText.Add(restrictionText.Text);
                 }
 
-                for (int i = 0; i < industries.Count; i++)
+            }
+
+            for (int i = 0; i < industries.Count; i++)
+            {
+                CheckBox isCheckedI = IndustryDataGrid.Columns[0].GetCellContent(IndustryDataGrid.Items[i]) as CheckBox;
+                if (isCheckedI == null)
                 {
-                    CheckBox isCheckedI = IndustryDataGrid.Columns[0].GetCellContent(IndustryDataGrid.Items[i]) as CheckBox;
-                    if (isCheckedI == null)
+                    isCheckedI = new CheckBox();
+                }
+                if (isCheckedI.IsChecked == true)
+                {
+                    DateTime startDateText = new DateTime(2008, 5, 1, 8, 30, 52);
+                    DateTime endDateText = new DateTime(2008, 5, 1, 8, 30, 52);
+                    TextBlock industryText = IndustryDataGrid.Columns[1].GetCellContent(IndustryDataGrid.Items[i]) as TextBlock;
+                    industriesJoinText.Add(industryText.Text);
+                    industryRestrictions.Add(new IndustryRestriction()
                     {
-                        isCheckedI = new CheckBox();
-                    }
-                    if (isCheckedI.IsChecked == true)
-                    {
-                        DateTime startDateText = new DateTime(2008, 5, 1, 8, 30, 52);
-                        DateTime endDateText = new DateTime(2008, 5, 1, 8, 30, 52);
-                        TextBlock industryText = IndustryDataGrid.Columns[1].GetCellContent(IndustryDataGrid.Items[i]) as TextBlock;
-                        industryRestrictions.Add(new IndustryRestriction()
-                        {
-                            R_Text = string.Join(", ", restrictionsJoinText),
-                            RI_StartDate = startDateText,
-                            RI_EndDate = endDateText,
-                            I_Name = industryText.Text,
-                            RI_M_ID = municipalitySelected
-                        });
-                    }
+                        R_Text = string.Join(", ", restrictionsJoinText),
+                        RI_StartDate = startDateText,
+                        RI_EndDate = endDateText,
+                        I_Name = industryText.Text
+                    });
                 }
             }
+
+            ResctrictionsChoosen.Text = string.Join(", ", restrictionsJoinText);
+            IndustriesChoosen.Text = string.Join(", ", industriesJoinText);
+
         }
 
         // Kasper
