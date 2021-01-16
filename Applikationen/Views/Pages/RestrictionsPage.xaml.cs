@@ -2,6 +2,7 @@
 using Applikationen.MunicipalityFunctions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -121,6 +122,25 @@ namespace Applikationen.Views.Pages
                     chkBox.IsChecked = !chkBox.IsChecked;
                 }
             }
+        }
+
+        //
+        //
+        // MANGLER KODE FOR UDHENTNING AF ID I GRIDVIEW
+        //
+        //
+        public void DeleteIndustryRestrictions()
+        {
+            // SKAL UDHENTE LISTE FRA DATA VALGT TIL SLETNING
+            IndustryRestriction iRes = new IndustryRestriction();
+            List<IndustryRestriction> list = new List<IndustryRestriction>();
+            iRes.DeleteIndustryRestriction(list);
+
+            RestrictionsPageIR.Columns.Clear();
+            RestrictionsPageIR.Items.Clear();
+            RestrictionsPageIR.Items.Refresh();
+
+            // NEED TO INSERT FUNCTION TO POPULATE RESTRICTIONSPAGEIR AGAIN
         }
     }
 }
