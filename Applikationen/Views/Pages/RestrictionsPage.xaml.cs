@@ -62,7 +62,7 @@ namespace Applikationen.Views.Pages
         }
 
         // Kasper og Natasha
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddRestrictions_Click(object sender, RoutedEventArgs e)
         {
             Industry industry = new Industry();
             List<Industry> industries = industry.GetIndustry();
