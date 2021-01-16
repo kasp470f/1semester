@@ -21,11 +21,12 @@ namespace Applikationen.MunicipalityFunctions
         // We define municipalities variables
         public int M_ID { get; set; }
         public string Name { get; set; }
-        public string M_Name { get; set; }
+        public string Region { get; set; }
 
         public List<object> municipalities = new List<object>();
         public List<object> municipalityNames = new List<object>();
         public List<IndustryRestriction> industriesRestrictions = new List<IndustryRestriction>();
+        public List<Municipality> municipalityFullList = new List<Municipality>();
 
         // Keemon & Natasha
         public List<ComboBoxItem> GetMunicipalityList()
@@ -47,7 +48,7 @@ namespace Applikationen.MunicipalityFunctions
                     // While it's reading the data we add it to a new object for each row of the Municipalities table
                     while (dataReader.Read())
                     {
-                        municipalityNames.Add(new Municipality() { Name = Convert.ToString(dataReader.GetValue(1)) });
+                        municipalityNames.Add(new Municipality() { Name = Convert.ToString(dataReader.GetValue(1)), Region = Convert.ToString(dataReader.GetValue(2)) });
                     }
                     foreach (Municipality municipality in municipalityNames)
                     {
@@ -65,6 +66,46 @@ namespace Applikationen.MunicipalityFunctions
             catch (Exception e)
             {
                 List<ComboBoxItem> emptyList = new List<ComboBoxItem>();
+                MessageBox.Show("Database forbindelsen kunne ikke oprettes\n\nSystem fejlbesked:\n" + e.Message);
+                return emptyList;
+            }
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open) cnn.Close();
+            }
+        }
+
+        public List<Municipality> GetMunicipalityFullList()
+        {
+
+            SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["post"].ConnectionString);
+            try
+            {
+                cnn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                string sql = "SELECT * FROM \"Municipalities\"";
+                using (SqlCommand command = new SqlCommand(sql, cnn))
+                {
+                    var dataReader = command.ExecuteReader();
+
+
+                    List<Municipality> list = new List<Municipality>();
+
+                    // While it's reading the data we add it to a new object for each row of the Municipalities table
+                    while (dataReader.Read())
+                    {
+                        municipalityFullList.Add(new Municipality() { Name = Convert.ToString(dataReader.GetValue(1)), Region = Convert.ToString(dataReader.GetValue(2)) });
+                    }
+
+                    // We delete the command and close the connection
+                    command.Dispose();
+                    cnn.Close();
+                    return municipalityFullList;
+                }
+            }
+            catch (Exception e)
+            {
+                List<Municipality> emptyList = new List<Municipality>();
                 MessageBox.Show("Database forbindelsen kunne ikke oprettes\n\nSystem fejlbesked:\n" + e.Message);
                 return emptyList;
             }
@@ -117,8 +158,8 @@ namespace Applikationen.MunicipalityFunctions
                                         RI_I_ID = Convert.ToInt32(dataReader2.GetValue(2)),
                                         RI_M_ID = Convert.ToInt32(dataReader2.GetValue(3)),
                                         RI_R_ID = Convert.ToInt32(dataReader2.GetValue(4)),
-                                        RI_StartDate = Convert.ToDateTime(dataReader2.GetValue(5)),
-                                        RI_EndDate = Convert.ToDateTime(dataReader2.GetValue(6))
+                                        RI_StartDate = Convert.ToString(dataReader2.GetValue(5)),
+                                        RI_EndDate = Convert.ToString(dataReader2.GetValue(6))
                                     });
                                 }
                                 dataReader2.Close();
@@ -126,7 +167,7 @@ namespace Applikationen.MunicipalityFunctions
 
                                 foreach (DatabaseClasses.IndustryRestriction ir in industriesRestrictions)
                                 {
-                                    string sql3 = "SELECT * FROM Industries WHERE I_ID LIKE '%" + ir.RI_I_ID + "%'";
+                                    string sql3 = "SELECT * FROM Industries WHERE I_ID LIKE " + ir.RI_I_ID + "";
                                     using (SqlCommand command3 = new SqlCommand(sql3, cnn))
                                     {
                                         var dataReader3 = command3.ExecuteReader();
@@ -141,8 +182,8 @@ namespace Applikationen.MunicipalityFunctions
                                         command3.Dispose();
                                     }
 
-                                    string sql4 = "SELECT * FROM Restrictions WHERE R_ID LIKE '%" + ir.RI_R_ID + "%'";
-                                    using (SqlCommand command4 = new SqlCommand(sql3, cnn))
+                                    string sql4 = "SELECT * FROM Restrictions WHERE R_ID LIKE " + ir.RI_R_ID + "";
+                                    using (SqlCommand command4 = new SqlCommand(sql4, cnn))
                                     {
                                         var dataReader4 = command4.ExecuteReader();
                                         while (dataReader4.Read())
@@ -153,11 +194,6 @@ namespace Applikationen.MunicipalityFunctions
                                         dataReader4.Close();
                                         command4.Dispose();
                                     }
-
-                                    //Debug.Write(ir.I_Name + "\n");
-                                    //Debug.Write(ir.I_Code + "\n");
-                                    //Debug.Write(ir.I_Description + "\n");
-                                    //Debug.Write(ir.R_Text + "\n");
                                 }
                             }
                         }

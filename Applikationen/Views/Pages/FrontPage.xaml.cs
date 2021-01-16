@@ -18,7 +18,7 @@ namespace Applikationen.Views.Pages
 
         public bool IndicatorStatus = true;
 
-
+        // Kasper, Keemon & Natasha
         public FrontPage()
         {
             InitializeComponent();
@@ -26,10 +26,10 @@ namespace Applikationen.Views.Pages
             // Displays municipalities in dropdown menu/combobox
             DisplayMunicipalities();
             FolderPath = string.Empty;
-            if (IndicatorStatus == true) Indicator.Style = FindResource("IndicatorGood") as Style;
-            else Indicator.Style = FindResource("IndicatorBad") as Style;
+            Indicator.Style = FindResource("IndicatorNoChoice") as Style;
         }
 
+        // Kasper
         private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
@@ -61,6 +61,8 @@ namespace Applikationen.Views.Pages
             }
         }
 
+
+        // Keemon & Natasha
         public void DisplayMunicipalityRestrictions()
         {
             Municipality municipality = new Municipality();
@@ -72,6 +74,7 @@ namespace Applikationen.Views.Pages
             }
         }
 
+        //Kasper 
         private void RegionDataBinding()
         {
             try
@@ -88,6 +91,7 @@ namespace Applikationen.Views.Pages
 
                 double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
                 DKpercentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
+                
 
                 double hospitalized = coronaDataUsed.Hospitalized;
                 DKhospitalizedBox.Text = string.Format("{0}", hospitalized);
@@ -100,9 +104,9 @@ namespace Applikationen.Views.Pages
             {
                 MessageBox.Show(es.Message);
             }
-
         }
 
+        //Kasper 
         private void MunicipalityDataBinding()
         {
             try
@@ -111,14 +115,38 @@ namespace Applikationen.Views.Pages
 
                 var coronaDataUsed = MunicipalityDataCSV.Single(Municipality => Municipality.Municipality == MunicipalityChoosen);
 
-                double positive = coronaDataUsed.Positive;
+                long positive = coronaDataUsed.Positive;
                 MCpositiveBox.Text = string.Format("{0}", positive);
 
-                double tested = coronaDataUsed.Tested;
+                long tested = coronaDataUsed.Tested;
                 MCTtestedBox.Text = string.Format("{0}", tested);
 
                 double percentagePositive = coronaDataUsed.PercentageOfData(coronaDataUsed.Positive, coronaDataUsed.Tested);
                 MCpercentagePositiveBox.Text = string.Format("{0:n}%", percentagePositive);
+                if (percentagePositive > 2)
+                {
+                    Indicator.Style = FindResource("IndicatorBad") as Style;
+                }
+                else if (percentagePositive < 2)
+                {
+                    Indicator.Style = FindResource("IndicatorGood") as Style;
+                }
+
+                Municipality municipality = new Municipality();
+                List<Municipality> municipalitiesRegion = municipality.GetMunicipalityFullList();
+
+                var coronaDataUsedRegion = municipalitiesRegion.Single(Municipality => Municipality.Name == MunicipalityChoosen);
+
+                var regionCSV = RegionData.ReadCSV(FolderPath + "\\Region_summary.csv");
+
+                var regionDataUsed = regionCSV.Single(Region => Region.Region == coronaDataUsedRegion.Region);
+
+                double hospitalized = regionDataUsed.Hospitalized;
+                MChospitalizedBox.Text = string.Format("{0}", hospitalized);
+
+                double deaths = regionDataUsed.Deaths;
+                MCdeathsBox.Text = string.Format("{0}", deaths);
+
             }
             catch (System.Exception es)
             {
@@ -126,7 +154,7 @@ namespace Applikationen.Views.Pages
             }
         }
 
-
+        //Kasper 
         private void MunicipalityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MunicipalityChoosen = municipalityBox.SelectedValue.ToString();
