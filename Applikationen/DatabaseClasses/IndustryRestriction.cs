@@ -29,21 +29,93 @@ namespace Applikationen.DatabaseClasses
         // Restriction variables
         public string R_Text { get; set; }
 
+        // Municipality variables
+        public string M_Name { get; set; }
+
         // Natasha
-		// Method to get industries from database
-		public void DeleteIndustryRestriction(List<IndustryRestriction> list)
+        // Method to get industries from database
+        public void DeleteIndustryRestriction(List<IndustryRestriction> list)
 		{
-			// We open the connection to the database
-			SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["post"].ConnectionString);
+            // We open the connection to the database
+            SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["post"].ConnectionString);
 			try
 			{
 				cnn.Open();
 				SqlDataAdapter adapter = new SqlDataAdapter();
                 foreach (IndustryRestriction item in list)
                 {
-                    string sql = "DELETE FROM IndustriesRestrictions WHERE RI_ID = " + item.RI_ID;
+                    // Select R_ID
+                    string sql1 = "SELECT * FROM Restrictions WHERE R_Text = '" + item.R_Text + "'";
 
-                    using (SqlCommand command = new SqlCommand(sql, cnn))
+                    using (SqlCommand command = new SqlCommand(sql1, cnn))
+                    {
+                        var dataReader = command.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            item.RI_R_ID = Convert.ToInt32(dataReader.GetValue(0));
+                        }
+
+                        // We delete the command and close the connection
+                        dataReader.Close();
+                        command.Dispose();
+                    }
+
+                    // Select I_ID
+                    string sql2 = "SELECT * FROM Industries WHERE I_Name = '" + item.I_Name + "'";
+
+                    using (SqlCommand command = new SqlCommand(sql2, cnn))
+                    {
+                        var dataReader = command.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            item.RI_I_ID = Convert.ToInt32(dataReader.GetValue(0));
+                        }
+
+                        // We delete the command and close the connection
+                        dataReader.Close();
+                        command.Dispose();
+                    }
+
+                    // Select M_ID
+                    string sql3 = "SELECT * FROM Municipalities WHERE M_Name = '" + item.M_Name + "'";
+
+                    using (SqlCommand command = new SqlCommand(sql3, cnn))
+                    {
+                        var dataReader = command.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            item.RI_M_ID = Convert.ToInt32(dataReader.GetValue(0));
+                        }
+
+                        // We delete the command and close the connection
+                        dataReader.Close();
+                        command.Dispose();
+                    }
+
+                    // Select RI_ID
+                    string sql4 = "SELECT * FROM IndustriesRestrictions WHERE RI_R_ID = '" + item.RI_R_ID + "' AND RI_I_ID = '" + item.RI_I_ID + "' AND RI_M_ID = '" + item.RI_M_ID + "'";
+
+                    using (SqlCommand command = new SqlCommand(sql4, cnn))
+                    {
+                        var dataReader = command.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            item.RI_ID = Convert.ToInt32(dataReader.GetValue(0));
+                        }
+
+                        // We delete the command and close the connection
+                        dataReader.Close();
+                        command.Dispose();
+
+                    }
+
+                    string sql5 = "DELETE FROM IndustriesRestrictions WHERE RI_ID = " + item.RI_ID;
+
+                    using (SqlCommand command = new SqlCommand(sql5, cnn))
                     {
                         var dataReader = command.ExecuteReader();
 

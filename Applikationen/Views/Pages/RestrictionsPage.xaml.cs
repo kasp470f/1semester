@@ -13,6 +13,8 @@ namespace Applikationen.Views.Pages
     /// </summary>
     public partial class RestrictionsPage : Page
     {
+        public string MunicipalityChoosen { get; set; }
+
         public RestrictionsPage()
         {
             InitializeComponent();
@@ -20,6 +22,7 @@ namespace Applikationen.Views.Pages
             DisplayMunicipalities();
             DisplayRestrictions();
             DisplayIndustries();
+            DisplayMunicipalityRestrictions();
         }
 
         // Keemon & Natasha
@@ -124,23 +127,59 @@ namespace Applikationen.Views.Pages
             }
         }
 
-        //
-        //
-        // MANGLER KODE FOR UDHENTNING AF ID I GRIDVIEW
-        //
-        //
-        public void DeleteIndustryRestrictions()
+        public void DisplayMunicipalityRestrictions()
         {
-            // SKAL UDHENTE LISTE FRA DATA VALGT TIL SLETNING
+            Municipality municipality = new Municipality();
+            List<IndustryRestriction> restrictions = municipality.DisplayMunicipalityRestrictions(MunicipalityChoosen);
+
+            foreach (IndustryRestriction ir in restrictions)
+            {
+                RestrictionsPageIR.Items.Add(ir);
+            }
+        }
+
+        //Kasper 
+        private void MunicipalityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MunicipalityChoosen = municipalityBox.SelectedValue.ToString();
+            DisplayMunicipalityRestrictions();
+        }
+
+        public void DeleteIndustryRestrictions_Click()
+        {
             IndustryRestriction iRes = new IndustryRestriction();
             List<IndustryRestriction> list = new List<IndustryRestriction>();
+
+            Municipality municipality = new Municipality();
+            List<IndustryRestriction> restrictions = municipality.DisplayMunicipalityRestrictions(MunicipalityChoosen);
+
+            for (int i = 0; i < restrictions.Count; i++)
+            {
+                CheckBox isCheckedI = RestrictionsPageIR.Columns[0].GetCellContent(RestrictionsPageIR.Items[i]) as CheckBox;
+                if (isCheckedI == null)
+                {
+                    isCheckedI = new CheckBox();
+                }
+                if (isCheckedI.IsChecked == true)
+                {
+                    TextBlock industryName = RestrictionsPageIR.Columns[4].GetCellContent(RestrictionsPageIR.Items[i]) as TextBlock;
+                    TextBlock restrictionText = RestrictionsPageIR.Columns[1].GetCellContent(RestrictionsPageIR.Items[i]) as TextBlock;
+                    list.Add(new IndustryRestriction()
+                    {
+                        R_Text = restrictionText.Text,
+                        I_Name = industryName.Text,
+                        M_Name = MunicipalityChoosen
+                    });
+                }
+            }
+
             iRes.DeleteIndustryRestriction(list);
 
             RestrictionsPageIR.Columns.Clear();
             RestrictionsPageIR.Items.Clear();
             RestrictionsPageIR.Items.Refresh();
 
-            // NEED TO INSERT FUNCTION TO POPULATE RESTRICTIONSPAGEIR AGAIN
+            DisplayMunicipalityRestrictions();
         }
     }
 }
