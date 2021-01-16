@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Applikationen.DatabaseClasses
-{
+{    
     public class IndustryRestriction
     {
-        // We define IndustryRestriction variables
         public int RI_ID { get; set; }
         public int RI_R_ID { get; set; }
         public int RI_M_ID { get; set; }
@@ -26,3 +25,4 @@ namespace Applikationen.DatabaseClasses
         public string R_Text { get; set; }
     }
 }
+
