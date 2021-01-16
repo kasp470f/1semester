@@ -194,11 +194,6 @@ namespace Applikationen.MunicipalityFunctions
                                         dataReader4.Close();
                                         command4.Dispose();
                                     }
-
-                                    //Debug.Write(ir.I_Name + "\n");
-                                    //Debug.Write(ir.I_Code + "\n");
-                                    //Debug.Write(ir.I_Description + "\n");
-                                    //Debug.Write(ir.R_Text + "\n");
                                 }
                             }
                         }
