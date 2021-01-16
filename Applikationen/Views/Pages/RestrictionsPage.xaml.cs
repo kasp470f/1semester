@@ -175,7 +175,6 @@ namespace Applikationen.Views.Pages
 
             iRes.DeleteIndustryRestriction(list);
 
-            RestrictionsPageIR.Columns.Clear();
             RestrictionsPageIR.Items.Clear();
             RestrictionsPageIR.Items.Refresh();
 
