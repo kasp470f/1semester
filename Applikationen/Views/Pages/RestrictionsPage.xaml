@@ -13,7 +13,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
-                <RowDefinition Height="*" MinHeight="180" MaxHeight="450"/>
+                <RowDefinition Height="180"/>
                 <RowDefinition Height="25" />
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -23,7 +23,7 @@
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox Name="municipalityBox" Width="130" Height="23" Grid.Column="0" IsEditable="True" IsReadOnly="True" Text="Vælg en kommune" FontWeight="SemiBold">
+                <ComboBox Name="MunicipalityBox" Width="130" Height="23" Grid.Column="0" IsEditable="True" IsReadOnly="True" Text="Vælg en kommune" FontWeight="SemiBold" SelectionChanged="MunicipalityBox_SelectionChanged">
                 </ComboBox>
             </Grid>
 
@@ -36,7 +36,7 @@
                 <StackPanel Orientation="Vertical" Grid.Column="0" Margin="30,0,40,0" MinHeight="100" MaxHeight="450">
                     <Label Content="Restriktioner" Grid.Column="0"/>
                     <TextBox Text="Søg i restriktioner..."></TextBox>
-                    <DataGrid Name="RestrictionDataGrid" Width="auto" Height="130" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" GotFocus="GotFocus" IsReadOnly="True">
+                    <DataGrid Name="RestrictionDataGrid" Width="auto" Height="130" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" GotFocus="GotFocus" EnableColumnVirtualization="false" EnableRowVirtualization="false">
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn x:Name="RestrictionCheckBox"/>
                             <DataGridTextColumn Binding="{Binding R_Text}" Width="0.7*"/>
@@ -47,9 +47,9 @@
                 <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,0,30,0">
                     <Label Content="Industrier" Grid.Column="1"/>
                     <TextBox Text="Søg i industrier..."></TextBox>
-                    <DataGrid Name="IndustryDataGrid" Width="auto" Height="130" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.CanContentScroll="True" GotFocus="GotFocus" IsReadOnly="True">
+                    <DataGrid Name="IndustryDataGrid" Width="auto" Height="130" Margin="0,-11,0,0" Panel.ZIndex="-1" IsReadOnly="True" GotFocus="GotFocus" EnableColumnVirtualization="false" EnableRowVirtualization="false">
                         <DataGrid.Columns>
-                            <DataGridCheckBoxColumn x:Name="IndustryCheckBox" IsReadOnly="true"/>
+                            <DataGridCheckBoxColumn x:Name="IndustryCheckBox" IsReadOnly="false"/>
                             <DataGridTextColumn Binding="{Binding I_Name}" Width="auto"/>
                             <DataGridTextColumn Binding="{Binding I_Code}" Width="auto"/>
                             <DataGridTextColumn Binding="{Binding I_Description}" Width="auto"/>
