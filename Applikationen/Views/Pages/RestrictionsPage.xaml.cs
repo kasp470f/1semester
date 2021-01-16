@@ -33,7 +33,7 @@ namespace Applikationen.Views.Pages
 
             foreach (var item in items)
             {
-                MunicipalityBox.Items.Add(item);
+                municipalityBox.Items.Add(item);
             }
         }
 
@@ -121,7 +121,7 @@ namespace Applikationen.Views.Pages
             RestrictionsPageIR.Items.Refresh();
 
             DisplayMunicipalityRestrictions();
-        }
+        
             ResctrictionsChoosen.Text = string.Join(", ", restrictionsJoinText);
             IndustriesChoosen.Text = string.Join(", ", industriesJoinText);
 
@@ -161,7 +161,7 @@ namespace Applikationen.Views.Pages
             DisplayMunicipalityRestrictions();
         }
 
-        public void DeleteIndustryRestrictions_Click()
+        public void DeleteIndustryRestrictions_Click(object sender, RoutedEventArgs e)
         {
             IndustryRestriction iRes = new IndustryRestriction();
             List<IndustryRestriction> list = new List<IndustryRestriction>();
@@ -180,18 +180,19 @@ namespace Applikationen.Views.Pages
                 {
                     TextBlock industryName = RestrictionsPageIR.Columns[4].GetCellContent(RestrictionsPageIR.Items[i]) as TextBlock;
                     TextBlock restrictionText = RestrictionsPageIR.Columns[1].GetCellContent(RestrictionsPageIR.Items[i]) as TextBlock;
+                    TextBlock industryID = RestrictionsPageIR.Columns[5].GetCellContent(RestrictionsPageIR.Items[i]) as TextBlock;
                     list.Add(new IndustryRestriction()
                     {
                         R_Text = restrictionText.Text,
                         I_Name = industryName.Text,
-                        M_Name = MunicipalityChoosen
+                        M_Name = MunicipalityChoosen,
+                        RI_I_ID = Convert.ToInt32(industryID.Text)
                     });
                 }
             }
 
             iRes.DeleteIndustryRestriction(list);
 
-            RestrictionsPageIR.Columns.Clear();
             RestrictionsPageIR.Items.Clear();
             RestrictionsPageIR.Items.Refresh();
 
