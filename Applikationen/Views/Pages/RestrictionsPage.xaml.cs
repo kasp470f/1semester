@@ -97,19 +97,27 @@ namespace Applikationen.Views.Pages
                 }
                 if (isCheckedI.IsChecked == true)
                 {
-                    DateTime startDateText = new DateTime(2008, 5, 1, 8, 30, 52);
-                    DateTime endDateText = new DateTime(2008, 5, 1, 8, 30, 52);
+                    string startDateText = DateTime.Now.ToString("yyyy/MM/dd");
+                    string endDateText = DateTime.Now.ToString("yyyy/MM/dd");
+                    TextBlock restrictionText = RestrictionDataGrid.Columns[1].GetCellContent(RestrictionDataGrid.Items[i]) as TextBlock;
                     TextBlock industryText = IndustryDataGrid.Columns[1].GetCellContent(IndustryDataGrid.Items[i]) as TextBlock;
                     industryRestrictions.Add(new IndustryRestriction()
                     {
-                        R_Text = string.Join(", ", restrictionsJoinText),
+                        R_Text = restrictionText.Text,
                         RI_StartDate = startDateText,
                         RI_EndDate = endDateText,
-                        I_Name = industryText.Text
+                        I_Name = industryText.Text,
+                        M_Name = MunicipalityChoosen
                     });
                 }
-
             }
+            IndustryRestriction irInsert = new IndustryRestriction();
+            irInsert.InsertIndustryRestriction(industryRestrictions);
+
+            RestrictionsPageIR.Items.Clear();
+            RestrictionsPageIR.Items.Refresh();
+
+            DisplayMunicipalityRestrictions();
         }
 
         private new void GotFocus(object sender, RoutedEventArgs e)
