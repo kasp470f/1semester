@@ -34,7 +34,9 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Vertical" Grid.Column="0" Margin="30,0,40,0" MinHeight="100" MaxHeight="450">
-                    <TextBox Text="Restriktioner" IsReadOnly="True"/>
+                    <Border BorderBrush="Gray" BorderThickness="0.5" Background="White">
+                        <TextBlock Text="Restriktioner" Margin="10,0,0,0"/>
+                    </Border>
                     <DataGrid Name="RestrictionDataGrid" Width="auto" Height="150" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" GotFocus="GotFocus" EnableColumnVirtualization="false" EnableRowVirtualization="false">
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn x:Name="RestrictionCheckBox"/>
@@ -44,7 +46,9 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,0,30,0">
-                    <TextBox Text="Industrier" IsReadOnly="True"/>
+                    <Border BorderBrush="Gray" BorderThickness="0.5" Background="White">
+                        <TextBlock Text="Industrier" Margin="10,0,0,0"/>
+                    </Border>
                     <DataGrid Name="IndustryDataGrid" Width="auto" Height="150" Margin="0,-11,0,0" Panel.ZIndex="-1" IsReadOnly="True" GotFocus="GotFocus" EnableColumnVirtualization="false" EnableRowVirtualization="false">
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn x:Name="IndustryCheckBox" IsReadOnly="false"/>
@@ -75,11 +79,11 @@
             </Grid>
 
             <Grid Grid.Row="3" Margin="0,5,0,0">
-                <StackPanel Orientation="Horizontal" Background="White" Height="25" VerticalAlignment="Top" Width="auto">
-                    <TextBlock Text="Restriktioner for kommunen" Margin="30,0,0,0"/>
-                    <Button Content="FJERN RESTRIKTIONER" FontSize="11" Height="18" Width="140" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="130,0,0,0" Click="DeleteIndustryRestrictions_Click"/>
-                </StackPanel>
-                
+                <Grid Background="White" Height="20" VerticalAlignment="Top" Width="auto" Margin="30,0,30,0">
+                    <TextBlock Text="Restriktioner for kommunen"/>
+                    <Button Content="FJERN RESTRIKTIONER" FontSize="11" Height="18" Width="140" HorizontalAlignment="Right" VerticalAlignment="Center"  Click="DeleteIndustryRestrictions_Click"/>
+                </Grid>
+
                 <DataGrid Name="RestrictionsPageIR" ItemsSource="{Binding}" Width="auto" Height="auto" Margin="30,20,30,10" IsReadOnly="True" GotFocus="GotFocus" EnableColumnVirtualization="false" EnableRowVirtualization="false">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn x:Name="IndustriesRestrictionsCheckBox"/>

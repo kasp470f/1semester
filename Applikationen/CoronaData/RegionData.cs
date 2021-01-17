@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
 
 namespace Applikationen.CoronaData
 {
-    // Keemon, Natasha, Nichlas
+
     public class RegionData
     {   
         public string Region { get; set; }
@@ -19,7 +14,15 @@ namespace Applikationen.CoronaData
         public double Hospitalized { get; set; }
         public double Deaths { get; set; }
 
-        // For processing Region_summary.csv data
+        /// <summary>
+        /// For processing Region_summary.csv data.
+        /// <para>Made by Keemon, Natasha, and Nichlas</para>
+        /// </summary>
+        /// <param name="region">What part of the country is the data from.</param>
+        /// <param name="tested">The amount of people that was tested for COVID19.</param>
+        /// <param name="positive">The amount of people that has been tested positive for COVID19.</param>
+        /// <param name="hospitalized">The amount of people that has been hospitalized with/for COVID19.</param>
+        /// <param name="deaths">The amount of people who have succumbed with COVID19.</param>
         public RegionData(string region, double tested, double positive, double hospitalized, double deaths)
         {
             Region = region;
@@ -29,7 +32,12 @@ namespace Applikationen.CoronaData
             Deaths = deaths;
         }
 
-        // For loading Region_summary.csv data
+        /// <summary>
+        /// For loading Region_summary.csv data
+        /// <para>Made by Kasper</para>
+        /// </summary>
+        /// <param name="fileName">The file/path to the file that is needed to read Region_summary.csv.</param>
+        /// <returns>A list of RegionData.</returns>
         public static IEnumerable<RegionData> ReadCSV(string fileName)
         {
             List<RegionData> listCSV = new List<RegionData>();
@@ -55,38 +63,20 @@ namespace Applikationen.CoronaData
             return listCSV;
         }
 
-        // ----------------
-        // Helper functions
-        // ----------------
-
-        // Calculate percentages, meant for use with percentagePositive
-        public double PercentageOfData(double newData, double totalData)
+        #region Helper Functions
+        /// <summary>
+        /// Calculate percentages, meant for use with percentagePositive.
+        /// <para>Made by Kasper, Natasha and Keemon</para>
+        /// </summary>
+        /// <param name="positive">The amount of people tested postive for COVID19.</param>
+        /// <param name="totalTested">The total amount of people tested for COVID19, regardless of them being positive.</param>
+        /// <returns>The percentage of people tested positive for COVID19.</returns>
+        public double PercentageOfData(double positive, double totalTested)
         {
             // We take the newData and find which percentage of the totalData it is
-            double percentComplete = (double)Math.Round((double)(100 * newData) / totalData);
+            double percentComplete = (double)Math.Round((double)(100 * positive) / totalTested);
             return percentComplete;
         }
-
-        // For getting data for all of Denmark
-        public int SumOfData(int[] collectionOfData)
-        {
-            // Add up the collection data
-            int total = collectionOfData.Sum();
-            return total;
-        }
-
-        // For getting total data in time period
-        public int SumOfDataTimespan(int[] collectionOfData, int timespanDays)
-        {
-            // Turn the array around to get newest data first instead of oldest
-            Array.Reverse(collectionOfData);
-
-            // Select only the indexes from the timespan needed
-            int[] dataInTimespan = collectionOfData.Take(timespanDays).ToArray();
-
-            // Add up the timespan data
-            int total = dataInTimespan.Sum();
-            return total;
-        }
+        #endregion
     }
 }

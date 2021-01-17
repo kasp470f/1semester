@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Applikationen.CoronaData
 {
@@ -16,7 +13,13 @@ namespace Applikationen.CoronaData
 
         public long Tested { get; set; }
 
-        // For the Municipality_test_pos.csv data constructor
+        /// <summary>
+        /// For the Municipality_test_pos.csv data constructor.
+        /// <para>Made by Kasper, Keemon and Natasha</para>
+        /// </summary>
+        /// <param name="municipality">A string for naming a municipality object</param>
+        /// <param name="tested">A long for assigning amount tested people object</param>
+        /// <param name="positive">A long for assigning amount infected people object</param>
         public MunicipalityPositive(string municipality, long tested, long positive)
         {
             Municipality = municipality;
@@ -24,7 +27,13 @@ namespace Applikationen.CoronaData
             Tested = tested;
         }
 
-        // For loading Municipality_test_pos.csv data
+
+        /// <summary>
+        /// For loading Municipality_test_pos.csv data
+        /// <para>Made by Kasper</para>
+        /// </summary>
+        /// <param name="fileName">The name of the file and path to that file, that needs to be read.</param>
+        /// <returns>A list that contains that information from the Municipality_test_pos.csv.</returns>
         public static IEnumerable<MunicipalityPositive> ReadCSV(string fileName)
         {
             List<MunicipalityPositive> listCSV = new List<MunicipalityPositive>();
@@ -50,16 +59,20 @@ namespace Applikationen.CoronaData
         }
 
 
-        // ----------------
-        // Helper functions
-        // ----------------
-
-        // Calculate percentages, meant for use with percentagePositive
-        public double PercentageOfData(double newData, double totalData)
+        #region Helper Functions
+        /// <summary>
+        /// Calculate percentages, meant for use with percentagePositive.
+        /// <para>Made by Kasper, Natasha and Keemon</para>
+        /// </summary>
+        /// <param name="positive">The amount of people tested postive for COVID19.</param>
+        /// <param name="totalTested">The total amount of people tested for COVID19, regardless of them being positive.</param>
+        /// <returns>The percentage of people tested positive for COVID19.</returns>
+        public double PercentageOfData(double positive, double totalTested)
         {
             // We take the newData and find which percentage of the totalData it is
-            double percentComplete = (double)Math.Round((double)(100 * newData) / totalData);
+            double percentComplete = (double)Math.Round((double)(100 * positive) / totalTested);
             return percentComplete;
         }
+        #endregion
     }
 }
