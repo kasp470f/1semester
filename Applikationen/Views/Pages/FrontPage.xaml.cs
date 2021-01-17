@@ -185,6 +185,8 @@ namespace Applikationen.Views.Pages
         private void MunicipalityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MunicipalityChoosen = municipalityBox.SelectedValue.ToString();
+            FrontPageIR.Items.Clear();
+            FrontPageIR.Items.Refresh();
             DisplayMunicipalityRestrictions();
             if (FolderPath != string.Empty)
             {
