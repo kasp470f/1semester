@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Applikationen.DatabaseClasses
 {
-	// Section is made by Natasha, and modified by Keemon and Kasper
+    /// <summary>
+    /// Made by Natasha, and modified by Keemon and Kasper
+    /// </summary>
     public class Industry
     {
 		// We define industry variables
@@ -23,7 +21,10 @@ namespace Applikationen.DatabaseClasses
 		// We create a list to store the industries from the database in
 		List<Industry> industries = new List<Industry>();
 
-		// Method to get industries from database
+		/// <summary>
+		/// Method to get industries from database
+		/// </summary>
+		/// <returns>A list of the industries from the database</returns>
 		public List<Industry> GetIndustry()
 		{
 
