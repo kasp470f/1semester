@@ -1,11 +1,6 @@
 ﻿using Applikationen.ViewModels.Commands;
 using Applikationen.Views.Pages;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -29,7 +24,11 @@ namespace Applikationen.ViewModels
         }
 
 
-
+        /// <summary>
+        /// Allows for the swap of pages in the MainView Frame
+        /// <para>Made by Keemon</para>
+        /// </summary>
+        /// <param name="name">The name of the page</param>
         public void SwapPageContent(string name)
         {
             switch (name)

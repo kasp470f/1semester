@@ -4,16 +4,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-// Insert 
-// MunicipalityFunctions.Municipality municipality = new MunicipalityFunctions.Municipality();
-// municipality.GetMunicipality();
-// On page where municipalities need to be called
 
-// Whole section is made by Natasha
+
 namespace Applikationen.MunicipalityFunctions
 {
     public class Municipality
@@ -28,20 +22,26 @@ namespace Applikationen.MunicipalityFunctions
         public List<IndustryRestriction> industriesRestrictions = new List<IndustryRestriction>();
         public List<Municipality> municipalityFullList = new List<Municipality>();
 
-        // Keemon & Natasha
+        /// <summary>
+        /// Allows us to extract a list of municipalities from the database and add them to a combobox.
+        /// <para>Kasper, Keemon and Natasha</para>
+        /// </summary>
+        /// <returns>A list for the combobox with the municipalities from the database</returns>
         public List<ComboBoxItem> GetMunicipalityList()
         {
-
+            // Create a connection to the database
             SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["post"].ConnectionString);
             try
             {
+                // Open that connection
                 cnn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 string sql = "SELECT * FROM \"Municipalities\"";
+
+                // Use a command to get that data we need
                 using (SqlCommand command = new SqlCommand(sql, cnn))
                 {
                     var dataReader = command.ExecuteReader();
-
 
                     List<ComboBoxItem> list = new List<ComboBoxItem>();
 
@@ -75,15 +75,23 @@ namespace Applikationen.MunicipalityFunctions
             }
         }
 
+        /// <summary>
+        /// Extracts all the municipalities from the database for data that we can search through.
+        /// <para>Made by Natasha</para>
+        /// </summary>
+        /// <returns>Gets a list of all the municipalities for binding the data and searching through it.</returns>
         public List<Municipality> GetMunicipalityFullList()
         {
-
+            // Create a connection to the database
             SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["post"].ConnectionString);
             try
             {
+                // Open that connection
                 cnn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 string sql = "SELECT * FROM \"Municipalities\"";
+
+                // Use a command to get that data we need
                 using (SqlCommand command = new SqlCommand(sql, cnn))
                 {
                     var dataReader = command.ExecuteReader();
@@ -115,18 +123,26 @@ namespace Applikationen.MunicipalityFunctions
             }
         }
 
+        /// <summary>
+        /// Pulls IndustriesRestrctions for the selected municipality from the database, from the relevant tables.
+        /// <para>Made by Natasha, Keemon, and Kasper</para>
+        /// </summary>
+        /// <param name="municipalityName">The name of the municipality that need to be displayed</param>
+        /// <returns>A list with the data which is then displayed in the relevant data grids.</returns>
         public List<IndustryRestriction> DisplayMunicipalityRestrictions(string municipalityName)
         {
+            //Database connection string
             SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["post"].ConnectionString);
             try
             {
                 cnn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
+                //Gets the correct municipality ID based on the chosen municipality name
                 string sql = "SELECT M_ID FROM Municipalities WHERE M_Name LIKE '%" + municipalityName + "%'";
                 using (SqlCommand command = new SqlCommand(sql, cnn))
                 {
                     var dataReader = command.ExecuteReader();
-
+                    //Data reader gets the value
                     if (dataReader != null && dataReader.HasRows)
                     {
                         Municipality m = new Municipality();
@@ -140,7 +156,7 @@ namespace Applikationen.MunicipalityFunctions
                         dataReader.Close();
 
                         int M_ID = m.M_ID;
-
+                        //Takes all data from IndustriesRestrictions for the current municipality
                         string sql2 = "SELECT * FROM IndustriesRestrictions WHERE RI_M_ID = " + M_ID;
                         using (SqlCommand command2 = new SqlCommand(sql2, cnn))
                         {
@@ -158,16 +174,16 @@ namespace Applikationen.MunicipalityFunctions
                                         RI_I_ID = Convert.ToInt32(dataReader2.GetValue(2)),
                                         RI_M_ID = Convert.ToInt32(dataReader2.GetValue(3)),
                                         RI_R_ID = Convert.ToInt32(dataReader2.GetValue(4)),
-                                        RI_StartDate = Convert.ToDateTime(dataReader2.GetValue(5)),
-                                        RI_EndDate = Convert.ToDateTime(dataReader2.GetValue(6))
+                                        RI_StartDate = Convert.ToString(dataReader2.GetValue(5)),
+                                        RI_EndDate = Convert.ToString(dataReader2.GetValue(6))
                                     });
                                 }
                                 dataReader2.Close();
                                 command2.Dispose();
-
+                                //Checks the industries
                                 foreach (DatabaseClasses.IndustryRestriction ir in industriesRestrictions)
                                 {
-                                    string sql3 = "SELECT * FROM Industries WHERE I_ID LIKE '%" + ir.RI_I_ID + "%'";
+                                    string sql3 = "SELECT * FROM Industries WHERE I_ID LIKE " + ir.RI_I_ID + "";
                                     using (SqlCommand command3 = new SqlCommand(sql3, cnn))
                                     {
                                         var dataReader3 = command3.ExecuteReader();
@@ -181,9 +197,9 @@ namespace Applikationen.MunicipalityFunctions
                                         dataReader3.Close();
                                         command3.Dispose();
                                     }
-
-                                    string sql4 = "SELECT * FROM Restrictions WHERE R_ID LIKE '%" + ir.RI_R_ID + "%'";
-                                    using (SqlCommand command4 = new SqlCommand(sql3, cnn))
+                                    //Checks the Restrictions 
+                                    string sql4 = "SELECT * FROM Restrictions WHERE R_ID LIKE " + ir.RI_R_ID + "";
+                                    using (SqlCommand command4 = new SqlCommand(sql4, cnn))
                                     {
                                         var dataReader4 = command4.ExecuteReader();
                                         while (dataReader4.Read())
@@ -204,6 +220,7 @@ namespace Applikationen.MunicipalityFunctions
             }
             catch (Exception e)
             {
+                //Error message if gathering of data fails
                 List<DatabaseClasses.IndustryRestriction> emptyList = new List<DatabaseClasses.IndustryRestriction>();
                 MessageBox.Show("Fejl ved hentning af restriktioner på industrier\n\nSystem fejlbesked:\n" + e.Message);
                 return emptyList;
