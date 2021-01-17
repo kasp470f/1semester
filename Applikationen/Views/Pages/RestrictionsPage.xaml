@@ -13,7 +13,8 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
-                <RowDefinition Height="auto" MinHeight="180" MaxHeight="300"/>
+                <RowDefinition Height="170"/>
+                <RowDefinition Height="30" />
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -22,7 +23,7 @@
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox Name="municipalityBox" Width="130" Height="23" Grid.Column="0" IsEditable="True" IsReadOnly="True" Text="Vælg en kommune" FontWeight="SemiBold">
+                <ComboBox Name="municipalityBox" Width="130" Height="23" Grid.Column="0" IsEditable="True" IsReadOnly="True" Text="Vælg en kommune" FontWeight="SemiBold" SelectedValuePath="Content" SelectionChanged="MunicipalityBox_SelectionChanged">
                 </ComboBox>
             </Grid>
 
@@ -32,27 +33,67 @@
                     <ColumnDefinition Width="1.6*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Vertical" Grid.Column="0" Margin="10,0,80,0">
-                    <Label Content="Restriktioner" Grid.Column="0"/>
-                    <TextBox Text="Søg i restriktioner..."></TextBox>
-                    <ListBox Height="auto" MinHeight="100"></ListBox>
-                    <Button Content="TILFØJ RESTRIKTIONER" Height="23" Margin="0,5,0,0" Width="140"></Button>
+                <StackPanel Orientation="Vertical" Grid.Column="0" Margin="30,0,40,0" MinHeight="100" MaxHeight="450">
+                    <Border BorderBrush="Gray" BorderThickness="0.5" Background="White">
+                        <TextBlock Text="Restriktioner" Margin="10,0,0,0"/>
+                    </Border>
+                    <DataGrid Name="RestrictionDataGrid" Width="auto" Height="150" Margin="0,-11,0,0" Panel.ZIndex="-1" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" GotFocus="GotFocus" EnableColumnVirtualization="false" EnableRowVirtualization="false">
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn x:Name="RestrictionCheckBox"/>
+                            <DataGridTextColumn Binding="{Binding R_Text}" Width="0.7*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
 
-                <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,0,40,0">
-                    <Label Content="Industrier" Grid.Column="1"/>
-                    <TextBox Text="Søg i industrier..."></TextBox>
-                    <ListBox Height="100"></ListBox>
+                <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,0,30,0">
+                    <Border BorderBrush="Gray" BorderThickness="0.5" Background="White">
+                        <TextBlock Text="Industrier" Margin="10,0,0,0"/>
+                    </Border>
+                    <DataGrid Name="IndustryDataGrid" Width="auto" Height="150" Margin="0,-11,0,0" Panel.ZIndex="-1" IsReadOnly="True" GotFocus="GotFocus" EnableColumnVirtualization="false" EnableRowVirtualization="false">
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn x:Name="IndustryCheckBox" IsReadOnly="false"/>
+                            <DataGridTextColumn Binding="{Binding I_Name}" Width="auto"/>
+                            <DataGridTextColumn Binding="{Binding I_Code}" Width="auto"/>
+                            <DataGridTextColumn Binding="{Binding I_Description}" Width="auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
             </Grid>
-            
-            <Grid Grid.Row="2">
-                <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,0,40,0">
-                    <Label Content="Industrier med påførte restriktioner" Grid.Column="1"/>
-                    <TextBox Text="Søg i industri restriktioner..."></TextBox>
-                    <ListBox Height="auto" MinHeight="100"></ListBox>
-                </StackPanel>
 
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.6*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="TILFØJ RESTRIKTIONER" Height="23" Width="140" HorizontalAlignment="Center" Click="AddRestrictions_Click"/>
+                <StackPanel Grid.Column="1">
+                    <StackPanel Orientation="Horizontal" Width="300" HorizontalAlignment="Left">
+                        <TextBlock Text="Restriktioner valgt: " FontWeight="DemiBold" FontSize="10"/>
+                        <TextBlock x:Name="ResctrictionsChoosen" FontSize="10" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Width="220"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Width="300" HorizontalAlignment="Left">
+                        <TextBlock Text="Industrier Valgt: " FontWeight="DemiBold" FontSize="10"/>
+                        <TextBlock x:Name="IndustriesChoosen" FontSize="10" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Width="220"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="0,5,0,0">
+                <Grid Background="White" Height="20" VerticalAlignment="Top" Width="auto" Margin="30,0,30,0">
+                    <TextBlock Text="Restriktioner for kommunen"/>
+                    <Button Content="FJERN RESTRIKTIONER" FontSize="11" Height="18" Width="140" HorizontalAlignment="Right" VerticalAlignment="Center"  Click="DeleteIndustryRestrictions_Click"/>
+                </Grid>
+
+                <DataGrid Name="RestrictionsPageIR" ItemsSource="{Binding}" Width="auto" Height="auto" Margin="30,20,30,10" IsReadOnly="True" GotFocus="GotFocus" EnableColumnVirtualization="false" EnableRowVirtualization="false">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn x:Name="IndustriesRestrictionsCheckBox"/>
+                        <DataGridTextColumn Header="Restriktioner" Binding="{Binding R_Text}" Width="0.7*"/>
+                        <DataGridTextColumn Header="Start Dato" Binding="{Binding RI_StartDate}" Width="0.5*"/>
+                        <DataGridTextColumn Header="Slut Dato" Binding="{Binding RI_EndDate}" Width="0.5*"/>
+                        <DataGridTextColumn Header="Industri" Binding="{Binding I_Name}" Width="3*"/>
+                        <DataGridTextColumn Binding="{Binding RI_I_ID}" Width="0.2"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </Grid>
     </Grid>

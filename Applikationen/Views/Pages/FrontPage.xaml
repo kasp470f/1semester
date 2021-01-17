@@ -59,50 +59,59 @@
                 <TextBlock Grid.Column="1" Text="Smittede"/>
                 <TextBlock Grid.Column="2" Text="Tests" />
                 <TextBlock Grid.Column="3" Text="Procent" />
-                <TextBlock Grid.Column="4" Text="Indlagte" />
-                <TextBlock Grid.Column="5" Text="Døde" />
+                <TextBlock Grid.Column="4" Text="Indlagte*">
+                    <TextBlock.ToolTip>
+                        <ToolTip Content="Indlagte for kommune er for regionen af kommunen"/>
+                    </TextBlock.ToolTip>
+                </TextBlock>
+                <TextBlock Grid.Column="5" Text="Døde*">
+                    <TextBlock.ToolTip>
+                        <ToolTip Content="Døde for kommune er for regionen af kommunen"/>
+                    </TextBlock.ToolTip>
+                </TextBlock>
                 <TextBlock Grid.Row="1" Text="Danmark" HorizontalAlignment="Left" />
                 <TextBlock Grid.Row="2" Text="Kommune" HorizontalAlignment="Left" />
 
                 <!--Dataen selv row 1-->
                 <Border Grid.Column="1">
-                    <TextBlock Name="DKpositiveBox" Text="{Binding Path=positive, UpdateSourceTrigger=Explicit}" />
+                    <TextBlock Name="DKpositiveBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="2">
-                    <TextBlock Name="DKtestedBox" Text="{Binding Path=tested, UpdateSourceTrigger=Explicit}"/>
+                    <TextBlock Name="DKtestedBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="3">
-                    <TextBlock Name="DKpercentagePositiveBox" Text="{Binding Path=percentagePositive, UpdateSourceTrigger=Explicit}"/>
+                    <TextBlock Name="DKpercentagePositiveBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="4">
-                    <TextBlock Name="DKhospitalizedBox" Text="{Binding Path=hospitalized, UpdateSourceTrigger=Explicit}"/>
+                    <TextBlock Name="DKhospitalizedBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="5">
-                    <TextBlock Name="DKdeathsBox" Text="{Binding Path=deaths, UpdateSourceTrigger=Explicit}"/>
+                    <TextBlock Name="DKdeathsBox" Text="0"/>
                 </Border>
                 <!--Dataen selv row 2-->
                 <Border Grid.Column="1" Grid.Row="2">
-                    <TextBlock Name="MCpositiveBox" />
+                    <TextBlock Name="MCpositiveBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="2" Grid.Row="2">
-                    <TextBlock Name="MCTtestedBox"/>
+                    <TextBlock Name="MCTtestedBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="3" Grid.Row="2">
-                    <TextBlock Name="MCpercentagePositiveBox"/>
+                    <TextBlock Name="MCpercentagePositiveBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="4" Grid.Row="2">
-                    <TextBlock Text="0"/>
+                    <TextBlock Name="MChospitalizedBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="5" Grid.Row="2">
-                    <TextBlock Text="0"/>
+                    <TextBlock Name="MCdeathsBox" Text="0"/>
                 </Border>
             </Grid>
 
-            <DataGrid Width="auto" Height="auto" Grid.Row="2" Margin="30,0,30,20">
+            <DataGrid Name="FrontPageIR" ItemsSource="{Binding}" Width="auto" Height="auto" Grid.Row="2" Margin="30,0,30,20">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Restriktion" Width="0.7*"/>
-                    <DataGridTextColumn Header="Kode" Width="0.5*"/>
-                    <DataGridTextColumn Header="Erhverv" Width="3*"/>
+                    <DataGridTextColumn Header="Restriktioner" Binding="{Binding R_Text}" Width="0.7*"/>
+                    <DataGridTextColumn Header="Start Dato" Binding="{Binding RI_StartDate}" Width="0.5*"/>
+                    <DataGridTextColumn Header="Slut Dato" Binding="{Binding RI_EndDate}" Width="0.5*"/>
+                    <DataGridTextColumn Header="Industri" Binding="{Binding I_Name}" Width="3*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
