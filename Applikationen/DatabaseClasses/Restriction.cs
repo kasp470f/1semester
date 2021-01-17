@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Windows;
 
 namespace Applikationen.DatabaseClasses
@@ -18,7 +17,11 @@ namespace Applikationen.DatabaseClasses
         // We create a list to store the restrictions from the database in
         List<Restriction> restrictions = new List<Restriction>();
 
-        // Method to get restrictions from database
+        /// <summary>
+        /// Method to get restrictions from database.
+        /// <para>Made by Natasha and Keemon</para>
+        /// </summary>
+        /// <returns>A list of restrictions</returns>
         public List<Restriction> GetRestriction()
         {
 
