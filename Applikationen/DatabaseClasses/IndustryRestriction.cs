@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Applikationen.DatabaseClasses
-{    
+{
     public class IndustryRestriction
     {
         public int RI_ID { get; set; }
@@ -31,8 +28,12 @@ namespace Applikationen.DatabaseClasses
         // Municipality variables
         public string M_Name { get; set; }
 
-        // Natasha
-        // Method to get industries from database
+
+        /// <summary>
+        /// Method to delete industry restrictions from the database
+        /// <para>Made by Natasha</para>
+        /// </summary>
+        /// <param name="list">The list of restrictions for industries that has to be deleted.</param>
         public void DeleteIndustryRestriction(List<IndustryRestriction> list)
         {
             // We open the connection to the database
@@ -120,6 +121,11 @@ namespace Applikationen.DatabaseClasses
             }
         }
 
+        /// <summary>
+        /// Inserts the industry restrictions
+        /// <para>Made by Natasha</para>
+        /// </summary>
+        /// <param name="list"></param>
         public void InsertIndustryRestriction(List<IndustryRestriction> list)
         {
             // We open the connection to the database
