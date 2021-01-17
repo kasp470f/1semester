@@ -74,29 +74,29 @@
 
                 <!--Dataen selv row 1-->
                 <Border Grid.Column="1">
-                    <TextBlock Name="DKpositiveBox" />
+                    <TextBlock Name="DKpositiveBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="2">
-                    <TextBlock Name="DKtestedBox" />
+                    <TextBlock Name="DKtestedBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="3">
-                    <TextBlock Name="DKpercentagePositiveBox" />
+                    <TextBlock Name="DKpercentagePositiveBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="4">
-                    <TextBlock Name="DKhospitalizedBox" />
+                    <TextBlock Name="DKhospitalizedBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="5">
-                    <TextBlock Name="DKdeathsBox"/>
+                    <TextBlock Name="DKdeathsBox" Text="0"/>
                 </Border>
                 <!--Dataen selv row 2-->
                 <Border Grid.Column="1" Grid.Row="2">
-                    <TextBlock Name="MCpositiveBox" />
+                    <TextBlock Name="MCpositiveBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="2" Grid.Row="2">
-                    <TextBlock Name="MCTtestedBox"/>
+                    <TextBlock Name="MCTtestedBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="3" Grid.Row="2">
-                    <TextBlock Name="MCpercentagePositiveBox"/>
+                    <TextBlock Name="MCpercentagePositiveBox" Text="0"/>
                 </Border>
                 <Border Grid.Column="4" Grid.Row="2">
                     <TextBlock Name="MChospitalizedBox" Text="0"/>
